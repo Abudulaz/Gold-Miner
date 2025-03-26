@@ -50,32 +50,36 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        switch (currentState)
+        // Only process hook logic if the game is running
+        if (GameManager.Instance != null && GameManager.Instance.currentState == GameManager.GameState.Running)
         {
-            case HookState.Swinging:
-                SwingHook();
-                // Check for left mouse button click to extend hook
-                if (Input.GetMouseButtonDown(0))
-                {
-                    currentState = HookState.Extending;
-                    hookDirection = (hook.transform.position - transform.position).normalized;
-                }
-                break;
-                
-            case HookState.Extending:
-                ExtendHook();
-                break;
-                
-            case HookState.Retracting:
-                RetractHook();
-                break;
-                
-            case HookState.Pulling:
-                PullObject();
-                break;
+            switch (currentState)
+            {
+                case HookState.Swinging:
+                    SwingHook();
+                    // Check for left mouse button click to extend hook
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        currentState = HookState.Extending;
+                        hookDirection = (hook.transform.position - transform.position).normalized;
+                    }
+                    break;
+                    
+                case HookState.Extending:
+                    ExtendHook();
+                    break;
+                    
+                case HookState.Retracting:
+                    RetractHook();
+                    break;
+                    
+                case HookState.Pulling:
+                    PullObject();
+                    break;
+            }
         }
         
-        // Update line renderer positions
+        // Always update line renderer positions regardless of game state
         if (lineRenderer != null)
         {
             lineRenderer.SetPosition(0, transform.position);
@@ -144,8 +148,9 @@ public class PlayerController : MonoBehaviour
             // Check if object is close enough to player
             if (Vector3.Distance(transform.position, hook.transform.position) < 1.0f)
             {
-                // Add score
-                GameManager.Instance.AddScore(caughtObject.value);
+                // Add score with value multiplier applied
+                int adjustedValue = Mathf.RoundToInt(caughtObject.value * Collectible.valueMultiplier);
+                GameManager.Instance.AddScore(adjustedValue);
                 
                 // Detach the object before destroying it
                 caughtObject.Detach();
@@ -185,6 +190,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("Not in Extending state, ignoring catch. Current state: " + currentState);
+        }
+    }
+    
+    // Method to update the score when dynamite explodes
+    // This could be called directly from Dynamite if needed
+    public void ApplyDynamiteDamage(int damageAmount)
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddScore(-damageAmount);
         }
     }
 }

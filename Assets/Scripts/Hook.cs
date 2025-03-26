@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
+    [SerializeField] private float colliderRadius = 0.1f;
     private PlayerController playerController;
     
     void Start()
@@ -16,8 +17,17 @@ public class Hook : MonoBehaviour
         {
             // Add a sphere collider if none exists
             SphereCollider collider = gameObject.AddComponent<SphereCollider>();
-            collider.radius = 0.5f;
+            collider.radius = colliderRadius;
             collider.isTrigger = true;
+        }
+        else
+        {
+            // If collider already exists, update its radius
+            SphereCollider existingCollider = GetComponent<SphereCollider>();
+            if (existingCollider != null)
+            {
+                existingCollider.radius = colliderRadius;
+            }
         }
         
         // Add a Rigidbody if none exists to ensure proper physics interactions

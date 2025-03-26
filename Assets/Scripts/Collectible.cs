@@ -8,6 +8,9 @@ public class Collectible : MonoBehaviour
     public float weight = 1.0f;
     private bool isCaught = false;
     
+    // Static value multiplier for store upgrades
+    public static float valueMultiplier = 1.0f;
+    
     void Start()
     {
         // Make sure we have a collider
@@ -59,13 +62,13 @@ public class Collectible : MonoBehaviour
     }
     
     // Make object follow the hook when caught
-    public void AttachToHook(Transform hookTransform)
+    public virtual void AttachToHook(Transform hookTransform)
     {
         transform.parent = hookTransform;
     }
     
     // Detach from hook (called when collected)
-    public void Detach()
+    public virtual void Detach()
     {
         transform.parent = null;
         isCaught = false;
