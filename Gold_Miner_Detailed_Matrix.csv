@@ -1,0 +1,25 @@
+﻿Variant,Claw Speed (units/sec),Retract Speed (units/sec),Pulling Strength (max weight),Missed Retract Delay (sec),Energy Consumption per Grab,External Forces Impact,Rotation Speed (deg/sec),Accuracy Deviation (degrees),Cooldown Between Grabs (sec)
+Basic Claw,5,3,10,1.5,0,None,30,5,1.2
+Upgraded Claw,7,5,15,1,1,Medium,45,3,0.8
+Advanced Claw,9,7,20,0.5,2,High,60,2,0.5
+Obstacle,Variant,Weight (units),Effect,Spawn Rate (per minute),Object Movement Speed (units/sec),Gold Value (coins),Difficulty Level,,
+Rock,Small,8,Slow to retrieve/Low value,4,0,5,Easy,,
+Rock,Medium,15,Very slow to retrieve/Medium value,3,0,10,Medium,,
+Rock,Large,25,Extremely slow to retrieve/Higher value,2,0,15,Hard,,
+Redworm,Slow,5,Hook miss penalty (1s),3,1,0,Easy,,
+Redworm,Medium,5,Hook miss penalty (2s),2,2,-10,Medium,,
+Redworm,Fast,5,Hook miss & brief stun (3s),1,4,-20,Hard,,
+Credit Card,Bronze,3,Next purchase discount,1,0,25% discount/50% reduction,Easy,,
+Credit Card,Silver,3,Next purchase discount,0.7,0,50% discount/75% reduction,Medium,,
+Credit Card,Gold,3,Next purchase discount,0.4,0,75% discount/90% reduction,Hard,,
+Item Name,Variant 1 (Easy),Variant 2 (Medium),Variant 3 (Hard),,,,,,
+Dynamite,3 uses per level,2 uses per level,1 use per level (higher cost),,,,,,
+Strength Drink,+10% pull strength/speed,+20% pull strength/speed,+40% pull strength/speed,,,,,,
+Lucky Clover,+5% rare item chance,+10% rare item chance,+20% rare item chance,,,,,,
+Rock Collector's Book,+10% rock value,+20% rock value,+40% rock value,,,,,,
+Diamond Polish,+10% diamond value increase,+20% diamond value,+40% diamond value increase,,,,,,
+Four-Leaf Clover,+10% very rare item chance,+20% very rare item chance,+35% very rare item chance,,,,,,
+Time Extension,+5 seconds per level,+10 seconds per level,+20 seconds per level,,,,,,
+Better Rope,+10% claw retrieval speed,+20% claw retrieval speed,+30% claw retrieval speed,,,,,,
+Strength Power-up,+10% pull speed on heavy items,+20% pull speed on heavy items,+35% pull speed on heavy items,,,,,,
+Improved Claw,Slightly wider grab range,Moderately wider grab,Significantly wider grab range,,,,,,

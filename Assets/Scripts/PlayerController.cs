@@ -193,13 +193,5 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    // Method to update the score when dynamite explodes
-    // This could be called directly from Dynamite if needed
-    public void ApplyDynamiteDamage(int damageAmount)
-    {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddScore(-damageAmount);
-        }
-    }
+    // Removed ApplyDynamiteDamage method as dynamite is no longer used
 }

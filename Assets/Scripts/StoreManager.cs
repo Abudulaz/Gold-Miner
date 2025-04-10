@@ -91,6 +91,12 @@ public class StoreManager : MonoBehaviour
     {
         if (storePanel != null)
             storePanel.SetActive(false);
+        
+        // Apply credit card money reduction if a discount was used
+        if (CreditCard.hasActiveCard && CreditCard.discountApplied)
+        {
+            CreditCard.ApplyMoneyReduction(gameManager);
+        }
             
         // Set the game back to running or game over based on time
         if (gameManager.timeRemaining > 0)

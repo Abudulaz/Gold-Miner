@@ -102,13 +102,13 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    [Header("Dynamite Settings")]
-    public GameObject dynamitePrefab;
-    public int dynamiteDamage = 50;
-    
     // Used to track all collectibles for collision prevention
     private List<Vector3> spawnedPositions = new List<Vector3>();
     
+    [Header("New Opposition Prefabs")]
+    public GameObject redwormPrefab;
+    public GameObject creditCardPrefab;
+
     void SpawnRandomObject()
     {
         Vector3 position;
@@ -136,40 +136,121 @@ public class GameManager : MonoBehaviour
         // Add this position to our list
         spawnedPositions.Add(position);
         
-        // Determine random size with more variation
-        float size = Random.Range(0.5f, 2.5f);
-        
-        // Decide what type of object to spawn (gold, rock, or dynamite)
+        // Decide what type of object to spawn based on our opposition matrix
         float randomValue = Random.value;
-        GameObject prefabToSpawn;
+        GameObject spawnedObject = null;
         
-        if (randomValue < 0.1f && dynamitePrefab != null) {
-            // 10% chance for dynamite
-            prefabToSpawn = dynamitePrefab;
-            // Dynamite has fixed smaller size
-            size = Random.Range(0.5f, 0.8f);
-        } else if (randomValue < 0.4f && goldPrefab != null) {
+        // Spawn distribution based on rarity (updated without dynamite):
+        // 55% chance for Rock (most common)
+        // 30% chance for Gold (medium rare)
+        // 10% chance for Redworm (uncommon)
+        // 5% chance for Credit Card (rare)
+        
+        if (randomValue < 0.55f && rockPrefab != null) {
+            // 55% chance for rock (increased from 50%)
+            spawnedObject = SpawnRock(position);
+        } 
+        else if (randomValue < 0.85f && goldPrefab != null) {
             // 30% chance for gold
-            prefabToSpawn = goldPrefab;
-        } else if (rockPrefab != null) {
-            // 60% chance for rock
-            prefabToSpawn = rockPrefab;
-        } else {
-            Debug.LogError("Prefab not assigned in GameManager!");
+            spawnedObject = Instantiate(goldPrefab, position, Quaternion.identity);
+            
+            // Random gold size
+            float goldSize = Random.Range(0.7f, 1.8f);
+            spawnedObject.transform.localScale = new Vector3(goldSize, goldSize, goldSize);
+        } 
+        else if (randomValue < 0.95f && redwormPrefab != null) {
+            // 10% chance for redworm
+            spawnedObject = SpawnRedworm(position);
+        } 
+        else if (creditCardPrefab != null) {
+            // 5% chance for credit card
+            spawnedObject = SpawnCreditCard(position);
+        }
+        else {
+            Debug.LogError("Some prefabs not assigned in GameManager!");
             return;
         }
         
-        // Create the object
-        GameObject obj = Instantiate(prefabToSpawn, position, Quaternion.identity);
-        obj.transform.localScale = new Vector3(size, size, size);
-        
-        // Adjust properties based on size
-        Collectible collectible = obj.GetComponent<Collectible>();
-        if (collectible != null) {
-            // Larger objects are worth more and weigh more
-            collectible.value = Mathf.RoundToInt(collectible.value * size);
-            collectible.weight = collectible.weight * size;
+        // If something went wrong with spawning, exit
+        if (spawnedObject == null) {
+            Debug.LogError("Failed to spawn object!");
+            return;
         }
+    }
+    
+    // Helper method to spawn a rock with random size
+    private GameObject SpawnRock(Vector3 position)
+    {
+        GameObject rock = Instantiate(rockPrefab, position, Quaternion.identity);
+        
+        // Assign random rock size based on difficulty distribution
+        Rock rockComponent = rock.GetComponent<Rock>();
+        if (rockComponent != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.5f) {
+                // 50% chance for small rock (easy)
+                rockComponent.size = Rock.RockSize.Small;
+            } else if (randomValue < 0.8f) {
+                // 30% chance for medium rock (medium)
+                rockComponent.size = Rock.RockSize.Medium;
+            } else {
+                // 20% chance for large rock (hard)
+                rockComponent.size = Rock.RockSize.Large;
+            }
+        }
+        
+        return rock;
+    }
+    
+    // Helper method to spawn a redworm with random speed
+    private GameObject SpawnRedworm(Vector3 position)
+    {
+        GameObject redworm = Instantiate(redwormPrefab, position, Quaternion.identity);
+        
+        // Assign random redworm speed based on difficulty distribution
+        Redworm redwormComponent = redworm.GetComponent<Redworm>();
+        if (redwormComponent != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.5f) {
+                // 50% chance for slow redworm (easy)
+                redwormComponent.speedType = Redworm.RedwormSpeed.Slow;
+            } else if (randomValue < 0.8f) {
+                // 30% chance for medium redworm (medium)
+                redwormComponent.speedType = Redworm.RedwormSpeed.Medium;
+            } else {
+                // 20% chance for fast redworm (hard)
+                redwormComponent.speedType = Redworm.RedwormSpeed.Fast;
+            }
+        }
+        
+        return redworm;
+    }
+    
+    // Helper method to spawn a credit card with random tier
+    private GameObject SpawnCreditCard(Vector3 position)
+    {
+        GameObject creditCard = Instantiate(creditCardPrefab, position, Quaternion.identity);
+        
+        // Assign random credit card type based on rarity
+        CreditCard creditCardComponent = creditCard.GetComponent<CreditCard>();
+        if (creditCardComponent != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.6f) {
+                // 60% chance for bronze (common)
+                creditCardComponent.cardType = CreditCard.CardType.Bronze;
+            } else if (randomValue < 0.9f) {
+                // 30% chance for silver (uncommon)
+                creditCardComponent.cardType = CreditCard.CardType.Silver;
+            } else {
+                // 10% chance for gold (rare)
+                creditCardComponent.cardType = CreditCard.CardType.Gold;
+            }
+        }
+        
+        return creditCard;
     }
     
     // Check if a position is far enough from other spawned objects
