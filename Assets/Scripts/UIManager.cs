@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public Button restartButton;
     
     private GameManager gameManager;
+    private RopeManager ropeManager;
     
     void Start()
     {
@@ -27,6 +28,9 @@ public class UIManager : MonoBehaviour
         {
             gameManager.OnGameStateChanged += HandleGameStateChanged;
         }
+        
+        // Find RopeManager
+        ropeManager = FindObjectOfType<RopeManager>();
         
         // Hide UI panels initially
         if (gameOverPanel != null)

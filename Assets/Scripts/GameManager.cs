@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
     [Header("New Opposition Prefabs")]
     public GameObject redwormPrefab;
     public GameObject creditCardPrefab;
+    public GameObject ropeStressPrefab;
 
     void SpawnRandomObject()
     {
@@ -140,31 +141,54 @@ public class GameManager : MonoBehaviour
         float randomValue = Random.value;
         GameObject spawnedObject = null;
         
-        // Spawn distribution based on rarity (updated without dynamite):
-        // 55% chance for Rock (most common)
-        // 30% chance for Gold (medium rare)
-        // 10% chance for Redworm (uncommon)
-        // 5% chance for Credit Card (rare)
+        // Check if we should spawn rope stress objects
+        bool spawnRopeStress = ropeStressPrefab != null && FindObjectOfType<RopeManager>() != null;
         
-        if (randomValue < 0.55f && rockPrefab != null) {
-            // 55% chance for rock (increased from 50%)
+        // Adjusted spawn distribution:
+        // If rope stress system is active:
+        // - 50% chance for Rock (most common)
+        // - 25% chance for Gold (medium rare)
+        // - 15% chance for Redworm (uncommon)
+        // - 10% chance for Rope Stress (rare)
+        //
+        // If rope stress is NOT active:
+        // - 55% chance for Rock
+        // - 30% chance for Gold
+        // - 15% chance for Redworm
+        
+        if (randomValue < 0.50f && rockPrefab != null) {
+            // 50% chance for rock
             spawnedObject = SpawnRock(position);
         } 
-        else if (randomValue < 0.85f && goldPrefab != null) {
-            // 30% chance for gold
-            spawnedObject = Instantiate(goldPrefab, position, Quaternion.identity);
-            
-            // Random gold size
-            float goldSize = Random.Range(0.7f, 1.8f);
-            spawnedObject.transform.localScale = new Vector3(goldSize, goldSize, goldSize);
+        else if (randomValue < 0.75f && goldPrefab != null) {
+            // 25% chance for gold
+            spawnedObject = SpawnGold(position);
         } 
-        else if (randomValue < 0.95f && redwormPrefab != null) {
-            // 10% chance for redworm
+        else if (randomValue < 0.90f && redwormPrefab != null) {
+            // 15% chance for redworm
             spawnedObject = SpawnRedworm(position);
         } 
-        else if (creditCardPrefab != null) {
-            // 5% chance for credit card
-            spawnedObject = SpawnCreditCard(position);
+        else if (spawnRopeStress) {
+            // 10% chance for rope stress (ONLY if RopeManager exists)
+            try {
+                spawnedObject = SpawnRopeStress(position);
+            }
+            catch (System.Exception e) {
+                Debug.LogError("Failed to spawn rope stress: " + e.Message);
+                // Fallback to spawn gold instead
+                if (goldPrefab != null)
+                    spawnedObject = SpawnGold(position);
+                else if (rockPrefab != null)
+                    spawnedObject = SpawnRock(position);
+            }
+        }
+        else if (goldPrefab != null) {
+            // Fallback to gold when rope stress can't be spawned
+            spawnedObject = SpawnGold(position);
+        }
+        else if (rockPrefab != null) {
+            // Last resort fallback to rock
+            spawnedObject = SpawnRock(position);
         }
         else {
             Debug.LogError("Some prefabs not assigned in GameManager!");
@@ -251,6 +275,81 @@ public class GameManager : MonoBehaviour
         }
         
         return creditCard;
+    }
+    
+    // Helper method to spawn a gold with proper size
+    private GameObject SpawnGold(Vector3 position)
+    {
+        GameObject gold = Instantiate(goldPrefab, position, Quaternion.identity);
+        
+        // Use the Gold.GoldSize enum instead of random scaling
+        Gold goldComponent = gold.GetComponent<Gold>();
+        if (goldComponent != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.5f) {
+                // 50% chance for small gold (common)
+                goldComponent.size = Gold.GoldSize.Small;
+            } else if (randomValue < 0.8f) {
+                // 30% chance for medium gold (uncommon)
+                goldComponent.size = Gold.GoldSize.Medium;
+            } else {
+                // 20% chance for large gold (rare)
+                goldComponent.size = Gold.GoldSize.Large;
+            }
+        }
+        
+        return gold;
+    }
+    
+    // Helper method to spawn a rope stress object with random level
+    private GameObject SpawnRopeStress(Vector3 position)
+    {
+        // Early return if prefab or RopeManager is missing
+        if (ropeStressPrefab == null || FindObjectOfType<RopeManager>() == null) {
+            Debug.LogWarning("Cannot spawn rope stress: prefab or RopeManager missing");
+            return null;
+        }
+
+        GameObject stressObj = Instantiate(ropeStressPrefab, position, Quaternion.identity);
+        
+        // Assign random stress type based on probability distribution
+        RopeStress stressComponent = stressObj.GetComponent<RopeStress>();
+        if (stressComponent != null)
+        {
+            try {
+                float randomValue = Random.value;
+                // Set serialized fields via reflection since they're private
+                var stressTypeField = stressComponent.GetType().GetField("stressType", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                var stressImpactField = stressComponent.GetType().GetField("stressImpact", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                
+                if (randomValue < 0.5f) {
+                    // 50% chance for Pressure (easy)
+                    if (stressTypeField != null)
+                        stressTypeField.SetValue(stressComponent, RopeStress.StressType.Pressure);
+                    if (stressImpactField != null)
+                        stressImpactField.SetValue(stressComponent, 0.1f);
+                } else if (randomValue < 0.8f) {
+                    // 30% chance for Tension (medium)
+                    if (stressTypeField != null)
+                        stressTypeField.SetValue(stressComponent, RopeStress.StressType.Tension);
+                    if (stressImpactField != null)
+                        stressImpactField.SetValue(stressComponent, 0.2f);
+                } else {
+                    // 20% chance for Shear (hard)
+                    if (stressTypeField != null)
+                        stressTypeField.SetValue(stressComponent, RopeStress.StressType.Shear);
+                    if (stressImpactField != null)
+                        stressImpactField.SetValue(stressComponent, 0.3f);
+                }
+            }
+            catch (System.Exception e) {
+                Debug.LogError("Error configuring RopeStress: " + e.Message);
+                // Continue with default values rather than failing
+            }
+        }
+        
+        return stressObj;
     }
     
     // Check if a position is far enough from other spawned objects

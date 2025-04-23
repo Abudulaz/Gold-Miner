@@ -14,8 +14,15 @@ public class Redworm : Collectible
     
     private Vector3 moveDirection;
     private float boundaryWidth = 8.0f;  // Match this with GameManager's spawnAreaWidth
+    private float boundaryHeight = 6.0f; // Match this with camera's vertical boundary
     private float timeSinceDirectionChange = 0f;
     private float directionChangeInterval = 2f;
+    private float stuckCheckInterval = 0.5f;
+    private float stuckCheckTimer = 0f;
+    private Vector3 lastPosition;
+    private bool potentiallyStuck = false;
+    private int consecStuckFrames = 0;
+    private int stuckThreshold = 3;
     
     void Start()
     {
@@ -94,20 +101,76 @@ public class Redworm : Collectible
             ChangeDirection();
             timeSinceDirectionChange = 0f;
         }
+        
+        // Check if stuck
+        stuckCheckTimer += Time.deltaTime;
+        if (stuckCheckTimer >= stuckCheckInterval)
+        {
+            CheckIfStuck();
+            stuckCheckTimer = 0f;
+        }
     }
     
     void ChangeDirection()
     {
-        // Pick a random 2D direction
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        moveDirection = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
+        // If at a boundary, move back toward center
+        if (IsAtBoundary())
+        {
+            Vector3 toCenter = -transform.position.normalized;
+            // Add some randomness so it doesn't move in a straight line
+            float randomAngle = Random.Range(-30f, 30f) * Mathf.Deg2Rad;
+            Vector3 randomDir = new Vector3(
+                Mathf.Cos(randomAngle) * toCenter.x - Mathf.Sin(randomAngle) * toCenter.y,
+                Mathf.Sin(randomAngle) * toCenter.x + Mathf.Cos(randomAngle) * toCenter.y,
+                0
+            );
+            moveDirection = randomDir.normalized;
+        }
+        else
+        {
+            // Pick a random 2D direction
+            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            moveDirection = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
+        }
     }
     
     bool IsAtBoundary()
     {
-        // Check if near the edge of the game area
+        // Check if near the edge of the game area (both X and Y axes)
         float halfWidth = boundaryWidth * 0.5f;
-        return (transform.position.x > halfWidth || transform.position.x < -halfWidth);
+        float halfHeight = boundaryHeight * 0.5f;
+        return (transform.position.x > halfWidth || transform.position.x < -halfWidth ||
+                transform.position.y > halfHeight || transform.position.y < -halfHeight);
+    }
+    
+    void CheckIfStuck()
+    {
+        // If we're close to the same position after a check interval, we might be stuck
+        if (lastPosition != Vector3.zero)
+        {
+            float distance = Vector3.Distance(transform.position, lastPosition);
+            
+            // If barely moved, count as potentially stuck
+            if (distance < 0.05f)
+            {
+                consecStuckFrames++;
+                if (consecStuckFrames >= stuckThreshold)
+                {
+                    // We're definitely stuck, force a new direction toward center
+                    Vector3 toCenter = Vector3.zero - transform.position;
+                    moveDirection = toCenter.normalized;
+                    consecStuckFrames = 0;
+                }
+            }
+            else
+            {
+                // Reset counter since we're moving fine
+                consecStuckFrames = 0;
+            }
+        }
+        
+        // Remember position for next check
+        lastPosition = transform.position;
     }
     
     // Override the AttachToHook method to apply penalty
