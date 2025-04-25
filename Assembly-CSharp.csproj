@@ -942,6 +942,10 @@
       <HintPath>D:\Unity\Hub\Editor\2021.3.4f1c1\2022.3.60f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing.Stores">
       <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Stores.dll</HintPath>
       <Private>False</Private>
@@ -1024,6 +1028,10 @@
     </Reference>
     <Reference Include="Unity.Services.Core.Components">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Components.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="McpUnity.Editor">
+      <HintPath>Library\ScriptAssemblies\McpUnity.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Services.Core.Environments">
