@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Gold Miner.sln"
+    "dotnet.defaultSolution": "Gold_Miner.sln"
 }

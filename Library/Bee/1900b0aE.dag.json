@@ -660,7 +660,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 107,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.TestRunner.UnityAdditionalFile.txt"
@@ -2812,7 +2812,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 52094,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.UnityAdditionalFile.txt"
@@ -3475,7 +3475,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 98730,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.TestRunner.UnityAdditionalFile.txt"
@@ -4166,7 +4166,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 156939,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.UnityAdditionalFile.txt"
@@ -4761,7 +4761,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 201026,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Analytics.UnityAdditionalFile.txt"
@@ -5306,7 +5306,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 242310,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.UnityAdditionalFile.txt"
@@ -5867,7 +5867,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 286988,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Tilemap.Editor.UnityAdditionalFile.txt"
@@ -6478,7 +6478,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 335785,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Editor.ConversionSystem.UnityAdditionalFile.txt"
@@ -7013,7 +7013,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 378080,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.UnityAdditionalFile.txt"
@@ -7529,7 +7529,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 418259,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Analytics.DataPrivacy.UnityAdditionalFile.txt"
@@ -8043,7 +8043,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 458298,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.UnityAdditionalFile.txt"
@@ -8573,7 +8573,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 499974,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.UnityAdditionalFile.txt"
@@ -9422,7 +9422,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 572489,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.UnityAdditionalFile.txt"
@@ -9974,7 +9974,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 616738,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.UnityAdditionalFile.txt"
@@ -10500,7 +10500,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 657950,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.UnityAdditionalFile.txt"
@@ -11070,7 +11070,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 702892,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.UnityAdditionalFile.txt"
@@ -11654,7 +11654,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 748863,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.UnityAdditionalFile.txt"
@@ -12188,7 +12188,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 790871,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.UnityAdditionalFile.txt"
@@ -12742,7 +12742,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 835145,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Advertisements.Editor.UnityAdditionalFile.txt"
@@ -13281,7 +13281,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 877539,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Advertisements.UnityAdditionalFile.txt"
@@ -13846,7 +13846,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 922481,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.SecurityCore.UnityAdditionalFile.txt"
@@ -14361,7 +14361,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 962700,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.WinRTCore.UnityAdditionalFile.txt"
@@ -14875,7 +14875,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1002793,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.SpatialTracking.UnityAdditionalFile.txt"
@@ -15389,7 +15389,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1042904,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/McpUnity.Editor.UnityAdditionalFile.txt"
@@ -15964,7 +15964,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1086890,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Editor.UnityAdditionalFile.txt"
@@ -16544,7 +16544,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1129398,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.CollabProxy.Editor.UnityAdditionalFile.txt"
@@ -17093,7 +17093,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1170936,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Analytics.UnityAdditionalFile.txt"
@@ -17628,7 +17628,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1211090,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Internal.UnityAdditionalFile.txt"
@@ -18223,7 +18223,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1260155,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.TextMeshPro.Editor.UnityAdditionalFile.txt"
@@ -18819,7 +18819,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1306007,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Timeline.Editor.UnityAdditionalFile.txt"
@@ -19639,7 +19639,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1371468,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.SpatialTracking.UnityAdditionalFile.txt"
@@ -20188,7 +20188,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1413068,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.SecurityStub.UnityAdditionalFile.txt"
@@ -20726,7 +20726,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1453559,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.WinRTStub.UnityAdditionalFile.txt"
@@ -21261,7 +21261,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1493737,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.XR.LegacyInputHelpers.UnityAdditionalFile.txt"
@@ -21780,7 +21780,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1534107,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Purchasing.Common.UnityAdditionalFile.txt"
@@ -22321,7 +22321,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1574489,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.AI.Navigation.Updater.UnityAdditionalFile.txt"
@@ -22882,7 +22882,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1616783,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Analytics.UnityAdditionalFile.txt"
@@ -23418,7 +23418,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1659053,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Configuration.UnityAdditionalFile.txt"
@@ -23949,7 +23949,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1700428,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Device.UnityAdditionalFile.txt"
@@ -24471,7 +24471,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1741113,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.Internal.UnityAdditionalFile.txt"
@@ -24988,7 +24988,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1781371,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.UnityAdditionalFile.txt"
@@ -25509,7 +25509,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1821721,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Networking.UnityAdditionalFile.txt"
@@ -26031,7 +26031,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1862140,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Scheduler.UnityAdditionalFile.txt"
@@ -26557,7 +26557,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1902948,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Telemetry.UnityAdditionalFile.txt"
@@ -27085,7 +27085,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1943992,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Threading.UnityAdditionalFile.txt"
@@ -27606,7 +27606,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 1984316,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.XR.LegacyInputHelpers.UnityAdditionalFile.txt"
@@ -28164,7 +28164,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2026601,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Components.UnityAdditionalFile.txt"
@@ -28709,7 +28709,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2067312,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Configuration.Editor.UnityAdditionalFile.txt"
@@ -29274,7 +29274,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2110195,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Registration.UnityAdditionalFile.txt"
@@ -29913,7 +29913,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2151755,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.AppleCore.UnityAdditionalFile.txt"
@@ -30428,7 +30428,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2191823,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.UnityAdditionalFile.txt"
@@ -31051,7 +31051,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2240393,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Editor.UnityAdditionalFile.txt"
@@ -31816,7 +31816,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2297244,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.AppleMacosStub.UnityAdditionalFile.txt"
@@ -32353,7 +32353,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2337536,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.AppleStub.UnityAdditionalFile.txt"
@@ -32872,7 +32872,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2377795,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.Editor.UnityAdditionalFile.txt"
@@ -33521,7 +33521,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2429684,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Advertisements.DevX.Editor.UnityAdditionalFile.txt"
@@ -34050,7 +34050,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2471375,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.Stores.UnityAdditionalFile.txt"
@@ -34822,7 +34822,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2528367,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Analytics.Editor.UnityAdditionalFile.txt"
@@ -35392,7 +35392,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2571098,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.Purchasing.Codeless.UnityAdditionalFile.txt"
@@ -35942,7 +35942,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2612174,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.Purchasing.UnityAdditionalFile.txt"
@@ -36588,7 +36588,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2663410,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.UnityAdditionalFile.txt"
@@ -37508,7 +37508,7 @@
       "ActionType": "WriteFile",
       "PayloadOffset": 2708141,
       "PayloadLength": 28,
-      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold Miner",
+      "PayloadDebugContentSnippet": "E:\\GitDesktop\\RGD\\Gold_Miner",
       "Inputs": [],
       "Outputs": [
         "Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.UnityAdditionalFile.txt"
@@ -40034,7 +40034,7 @@
     {
       "Annotation": "BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json",
       "DisplayName": "BuildPlayerDataGenerator TypeDb-All",
-      "Action": "\"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data\\Tools\\netcorerun\\netcorerun.exe\" \"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Assembly-CSharp.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Purchasing.Common.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.AI.Navigation.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Analytics.DataPrivacy.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Analytics.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Analytics.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Components.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Configuration.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Device.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Environments.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Environments.Internal.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Internal.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Networking.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Registration.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Scheduler.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Telemetry.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Threading.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.TextMeshPro.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\Unity.Timeline.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Advertisements.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleMacosStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.Codeless.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.SecurityCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.SecurityStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.Stores.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.WinRTCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.WinRTStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.SpatialTracking.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.TestRunner.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.UI.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\\UnityEngine.XR.LegacyInputHelpers.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\AnalyticsStandardEvents\\Unity.Analytics.StandardEvents.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\Unity.Analytics.Editor.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\Unity.Analytics.Tracker.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\\nunit.framework.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.nuget.newtonsoft-json@3.2.1\\Runtime\\Newtonsoft.Json.dll\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\Managed\\UnityEngine\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netfx\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netstandard\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\Extensions\\2.0.0\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\ref\\2.1.0\" -s=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\ScriptAssemblies\" -s=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\" -s=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\AnalyticsStandardEvents\" -s=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\" -s=\"E:\\GitDesktop\\RGD\\Gold Miner\\Library\\PackageCache\\com.unity.nuget.newtonsoft-json@3.2.1\\Runtime\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
+      "Action": "\"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data\\Tools\\netcorerun\\netcorerun.exe\" \"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Assembly-CSharp.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Purchasing.Common.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.AI.Navigation.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Analytics.DataPrivacy.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Analytics.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Analytics.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Components.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Configuration.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Device.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Environments.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Environments.Internal.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Internal.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Networking.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Registration.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Scheduler.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Telemetry.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Services.Core.Threading.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.TextMeshPro.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\Unity.Timeline.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Advertisements.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleMacosStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.AppleStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.Codeless.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.SecurityCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.SecurityStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.Stores.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.WinRTCore.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.Purchasing.WinRTStub.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.SpatialTracking.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.TestRunner.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.UI.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\\UnityEngine.XR.LegacyInputHelpers.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\AnalyticsStandardEvents\\Unity.Analytics.StandardEvents.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\Unity.Analytics.Editor.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\Unity.Analytics.Tracker.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\\nunit.framework.dll\" -a=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.nuget.newtonsoft-json@3.2.1\\Runtime\\Newtonsoft.Json.dll\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\Managed\\UnityEngine\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netfx\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netstandard\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\Extensions\\2.0.0\" -s=\"D:\\Unity\\Hub\\Editor\\2021.3.4f1c1\\2022.3.60f1\\Editor\\Data\\NetStandard\\ref\\2.1.0\" -s=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\ScriptAssemblies\" -s=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\" -s=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.analytics@3.8.1\\AnalyticsStandardEvents\" -s=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\" -s=\"E:\\GitDesktop\\RGD\\Gold_Miner\\Library\\PackageCache\\com.unity.nuget.newtonsoft-json@3.2.1\\Runtime\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
       "Inputs": [
         "D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/netcorerun/netcorerun.exe",
         "D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe",
@@ -40482,6 +40482,6 @@
   "SharedResources": [],
   "Scanners": [],
   "Identifier": "Library/Bee/1900b0aE.dag.json",
-  "PayloadsFile": "E:/GitDesktop/RGD/Gold Miner/Library/Bee/1900b0aE.dag.payloads",
+  "PayloadsFile": "E:/GitDesktop/RGD/Gold_Miner/Library/Bee/1900b0aE.dag.payloads",
   "RelativePathToRoot": "../.."
 }
