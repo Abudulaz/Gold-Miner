@@ -233,20 +233,20 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Distance(transform.position, hook.transform.position) < 1.0f)
             {
                 try
-                {
-                    // Add score with value multiplier applied
+            {
+                // Add score with value multiplier applied
                     if (GameManager.Instance != null)
                     {
-                        int adjustedValue = Mathf.RoundToInt(caughtObject.value * Collectible.valueMultiplier);
-                        GameManager.Instance.AddScore(adjustedValue);
+                int adjustedValue = Mathf.RoundToInt(caughtObject.value * Collectible.valueMultiplier);
+                GameManager.Instance.AddScore(adjustedValue);
                     }
-                    
-                    // Detach the object before destroying it
-                    caughtObject.Detach();
-                    
-                    // Destroy caught object
-                    Destroy(caughtObject.gameObject);
-                    caughtObject = null;
+                
+                // Detach the object before destroying it
+                caughtObject.Detach();
+                
+                // Destroy caught object
+                Destroy(caughtObject.gameObject);
+                caughtObject = null;
                 }
                 catch (System.Exception e)
                 {
@@ -256,8 +256,8 @@ public class PlayerController : MonoBehaviour
                 finally
                 {
                     // Reset hook state regardless of any errors
-                    currentState = HookState.Swinging;
-                    hook.transform.position = transform.position + Vector3.down;
+                currentState = HookState.Swinging;
+                hook.transform.position = transform.position + Vector3.down;
                 }
             }
         }

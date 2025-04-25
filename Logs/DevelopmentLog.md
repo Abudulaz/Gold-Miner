@@ -290,3 +290,137 @@
 - Added documentation for floating text feature in Docs/FloatingTextFeature.md
 - Documentation includes setup instructions, how it works, customization options, and troubleshooting
 - Both automatic (via editor script) and manual setup procedures are documented
+
+## 2025-04-23 19:38:45
+**Files Changed**: StoreItemUI.cs, StoreItem.cs, StoreManager.cs
+**User Request**: "Now let's work on the store system, since it's the only thing between levels progressions, So first I want is to make @StoreItemUI.cs simplier to work with, right now It has too many elements to assign to, We just need one text for emoji for icons instead of image, and another text for item name, another text for prince, button need to kept, and sold out overlay should be another text but different style, finally for discount, we just need one text for showing for example 20% in text but also different style"
+
+**Changes**:
+- Created a new StoreItem class with simplified fields including emojiIcon for emoji representation
+- Refactored StoreItemUI.cs to use TextMeshProUGUI for emoji icons instead of images
+- Simplified UI elements to just show:
+  - Emoji icon text
+  - Item name text
+  - Price text with optional discount
+  - Sold out text (instead of an overlay)
+  - Purchase button
+- Updated StoreManager.cs to work with the new StoreItem and StoreItemUI implementations
+- Added item ownership tracking through a list of purchased item IDs
+- Simplified the discount display mechanism
+- Added emoji icons (⚙️, ⏱️, ✨) for default store items 
+
+## 2025-04-23 19:45:12
+**Files Changed**: StoreItemUI.cs
+**User Request**: "Assets\Scripts\StoreItemUI.cs(18,13): error CS0246: The type or namespace name 'AudioManager' could not be found (are you missing a using directive or an assembly reference?)"
+
+**Changes**:
+- Fixed compilation error in StoreItemUI.cs by removing AudioManager dependency
+- Replaced AudioManager.PlaySFX calls with direct AudioSource usage
+- Added optional AudioClip field for purchase sound
+- Added code to automatically add AudioSource component if needed
+- Implemented sound playing through standard Unity AudioSource.PlayOneShot method 
+
+## 2025-04-23 20:15:32
+**Files Changed**: StoreItemData.cs, StoreItem.cs, StoreItemUI.cs, StoreManager.cs, Editor/StoreItemGenerator.cs
+**User Request**: "@StoreItemUI.cs instead of hand typing text for each element, how about you create scriptable item based on @Gold_Miner_Detailed_Matrix_V2.csv's items?"
+
+**Changes**:
+- Created ScriptableObject-based store item system with StoreItemData class
+- Modified StoreItem to work with StoreItemData and difficulty-based variants
+- Updated StoreItemUI to display emoji icons and item descriptions
+- Improved StoreManager to handle scriptable object-based items
+- Added support for difficulty levels (Easy, Medium, Hard) affecting prices and effects
+- Created Editor tool (StoreItemGenerator) to automatically generate store items from CSV data
+- Added proper emoji icons for all item types from the matrix
+- Implemented detailed price and effect calculations based on item type and difficulty
+- Fixed the missing emoji text field in the StoreItemUI component
+- Ensured backward compatibility with existing implementation 
+
+## 2025-04-23 20:23:45
+**Files Changed**: StoreManager.cs, StoreItemUI.cs
+**User Request**: "Assets\Scripts\StoreManager.cs(182,38): error CS1061: 'PlayerController' does not contain a definition for 'pullStrength' and no accessible extension method 'pullStrength' accepting a first argument of type 'PlayerController' could be found (are you missing a using directive or an assembly reference?) Assets\Scripts\StoreManager.cs(202,21): error CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?) and forget about the emoji, the text mesh pro doesn't seem to support it, we'll just use name text to show what is this item in store"
+
+**Changes**:
+- Fixed error in StoreManager.cs by removing the non-existent pullStrength property reference
+- Corrected the type mismatch in ropeManager2.maxStress by adding explicit conversion via Mathf.RoundToInt()
+- Removed the emoji text reference from StoreItemUI.cs since TextMeshPro doesn't support emojis
+- Updated UI to only display item name and description without emoji icons 
+
+## 2025-04-24 19:10:41
+**Files Changed**: StoreItem.cs, StoreItemData.cs, StoreManager.cs
+**User Request**: "Can you remove the emoji part of the items? unity doesn't support them, we'll just use text and I noticed that the @StoreItemPrefab.prefab not genrating upon start of the level, does they only spwan when store panel pop up?"
+
+**Changes**:
+- Completely removed emojiIcon property from StoreItem class to avoid emoji rendering issues
+- Removed emojiIcon property from StoreItemData class to maintain consistency
+- Updated StoreManager's SetupDefaultItems method to remove emoji icon references
+- Confirmed that store items are only generated when the store panel is opened
+- Store items are instantiated from the storeItemPrefab in the PopulateStoreItems method
+- This method is only called in the OpenStore function when GameState changes to Store 
+
+## 2025-04-24 21:04:24
+**Files Changed**: StoreItemData.cs
+**User Request**: "I'm getting an error that 'StoreItemData' does not contain a definition for 'emojiIcon' and no accessible extension method 'emojiIcon' accepting a first argument of type 'StoreItemData'"
+
+**Changes**:
+- Added the `emojiIcon` field back to StoreItemData class for compatibility with existing asset files
+- Marked the field with `[System.Obsolete]` attribute to indicate it's no longer actively used
+- Added a comment explaining that it's only kept for asset compatibility
+- This fix allows existing store item assets to load correctly without requiring regeneration 
+
+## 2025-04-25 01:19:14
+- Analyzed StoreManager.cs to understand store item generation mechanics
+- Identified parameters that control item generation: minItemCount, maxItemCount, randomizeItems, and ensureVariety
+- Explained how to:
+  - Set specific number of store items
+  - Show the same specific items consistently 
+  - Configure random item selection
+  - Add custom filtering logic for store items 
+
+## 2025-04-25 09:12:48
+**Files Changed**: StoreManager.cs
+**User Request**: "control the number and specific items generated in the store panel"
+
+**Changes**:
+- Added several new public methods to StoreManager.cs to control store item generation:
+  - `AddSpecificItemsToStore(string[] itemIDs)`: Adds specific items by their IDs to the store
+  - `AddSpecificItemToStore(string itemID)`: Adds a single item by ID with improved error handling
+  - `SetExactItemCount(int count)`: Sets both min and max item count to the same value
+  - `GetAllItemIDs()`: Returns array of all available item IDs from storeItemsData
+- These methods allow for:
+  - Full control over which items appear in the store
+  - Setting an exact number of items to display
+  - Adding specific items based on gameplay events or level progression
+  - Easily querying all available items in the system
+- Each method includes proper validation to handle edge cases and errors 
+
+## 2025-04-25 12:00:41
+**Files Changed**: StoreItemUI.cs, StoreManager.cs, GameManager.cs, CreditCard.cs (deleted)
+**User Request**: "I'm looking to identify references to the CreditCard.cs file in other files to determine what can be safely removed from the project."
+
+**Changes**:
+- Completely removed CreditCard functionality from the game:
+  - Deleted CreditCard.cs file entirely
+  - Removed PlayerHasCreditCard() method from StoreManager.cs
+  - Removed discount functionality from StoreItemUI.cs
+  - Removed credit card references from GameManager.cs (prefab and SpawnCreditCard method)
+- This simplified the codebase and removed unused functionality:
+  - Store items no longer have discount prices
+  - Game no longer spawns credit card collectibles
+  - Removed all discount-related UI elements and calculations
+  - Simplified price display in store UI 
+
+## 2025-04-25 12:12:07
+**Files Changed**: StoreItemUI.cs
+**User Request**: "NullReferenceException: Object reference not set to an instance of an object in StoreItemUI.Setup"
+
+**Changes**:
+- Fixed NullReferenceException in StoreItemUI.cs caused by timing issues:
+  - Added storeManager lookup in Awake() to ensure it's available before Start()
+  - Added additional null checks in Setup() method with error logging
+  - Improved safety in Update() and OnPurchaseClicked() with null checks
+  - Protected against accessing null references throughout the class
+- This resolves the error that occurred when opening the store panel:
+  - Previously, StoreItemUI objects' Setup() was called before their Start() method
+  - Now, the StoreManager reference is established earlier in Awake()
+  - Added defensive coding to prevent similar errors in the future 

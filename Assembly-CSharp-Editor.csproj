@@ -67,6 +67,7 @@
     <Compile Include="Assets\Editor\CopyPrefabToResources.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateExplosionPrefab.cs" />
     <Compile Include="Assets\Scripts\Editor\CreateDynamitePrefab.cs" />
+    <Compile Include="Assets\Scripts\Editor\StoreItemGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -1,178 +1,115 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class StoreItemUI : MonoBehaviour
 {
-    [Header("UI Elements")]
+    [Header("UI References")]
     public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
-    public Image iconImage;
+    public TextMeshProUGUI descriptionText; // Description text
     public Button purchaseButton;
-    public GameObject soldOutOverlay;
-    public GameObject discountBadge;
-    public TextMeshProUGUI discountPercentText;
+    public TextMeshProUGUI soldOutText;  // Text instead of overlay
     
-    private StoreManager.StoreItem itemData;
+    [Header("Audio")]
+    public AudioClip purchaseSound;      // Optional purchase sound
+
+    private StoreItem item;
     private StoreManager storeManager;
-    private bool purchased = false;
-    private int originalPrice = 0;
-    private int discountedPrice = 0;
-    
-    public void Setup(StoreManager.StoreItem item, StoreManager manager)
+    private AudioSource audioSource;
+
+    private void Awake()
     {
-        itemData = item;
-        storeManager = manager;
-        originalPrice = item.price;
+        // Find StoreManager immediately to ensure it's available
+        storeManager = FindObjectOfType<StoreManager>();
+    }
+
+    private void Start()
+    {
+        // Get or add AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null && purchaseSound != null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
+    /// <summary>
+    /// Setup the UI element with the store item data
+    /// </summary>
+    /// <param name="storeItem">The store item to display</param>
+    public void Setup(StoreItem storeItem)
+    {
+        item = storeItem;
         
-        // Set the UI elements
-        if (nameText != null)
-            nameText.text = item.itemName;
+        // Make sure we have a reference to the StoreManager
+        if (storeManager == null)
+        {
+            storeManager = FindObjectOfType<StoreManager>();
+            if (storeManager == null)
+            {
+                Debug.LogError("StoreManager not found - StoreItemUI cannot function properly");
+                return;
+            }
+        }
+        
+        // Set main properties
+        nameText.text = storeItem.itemName;
             
+        // Set description if available
         if (descriptionText != null)
-            descriptionText.text = item.description;
-            
-        // Apply credit card discount if applicable
-        UpdatePriceDisplay();
-            
-        if (iconImage != null && item.icon != null)
-            iconImage.sprite = item.icon;
-            
-        // Add listeners
-        if (purchaseButton != null)
-        {
-            purchaseButton.onClick.AddListener(OnPurchaseClicked);
-            
-            // Update button interactability based on player's money
-            UpdateButtonState();
-        }
+            descriptionText.text = storeItem.description;
         
-        // Hide sold out overlay initially
-        if (soldOutOverlay != null)
-            soldOutOverlay.SetActive(false);
+        // Update price display
+        UpdatePriceDisplay();
+        
+        // Check if already owned
+        bool isOwned = storeManager.PlayerOwnsItem(storeItem.itemID);
+        soldOutText.gameObject.SetActive(isOwned);
+        purchaseButton.interactable = !isOwned;
+    }
+
+    private void Update()
+    {
+        // Continuously check if item is already owned (in case of purchase from another menu)
+        if (item != null && storeManager != null)
+        {
+            bool isOwned = storeManager.PlayerOwnsItem(item.itemID);
+            soldOutText.gameObject.SetActive(isOwned);
+            purchaseButton.interactable = !isOwned;
+        }
+    }
+
+    /// <summary>
+    /// Updates the price display
+    /// </summary>
+    private void UpdatePriceDisplay()
+    {
+        priceText.text = $"${item.price}";
+    }
+
+    /// <summary>
+    /// Called when the purchase button is clicked
+    /// </summary>
+    public void OnPurchaseClicked()
+    {
+        if (storeManager == null || item == null)
+            return;
             
-        // Show discount badge if applicable
-        UpdateDiscountBadge();
-    }
-    
-    void Update()
-    {
-        // Continuously update button state based on player's money and price
-        if (!purchased && purchaseButton != null && storeManager != null)
+        bool purchaseSuccessful = storeManager.PurchaseItem(item.itemID, item.price);
+        
+        if (purchaseSuccessful)
         {
-            UpdateButtonState();
-            UpdatePriceDisplay();
-            UpdateDiscountBadge();
-        }
-    }
-    
-    void UpdatePriceDisplay()
-    {
-        if (priceText != null)
-        {
-            if (CreditCard.hasActiveCard && !CreditCard.discountApplied)
+            // Play purchase sound if available
+            if (audioSource != null && purchaseSound != null)
             {
-                // Apply discount
-                discountedPrice = CreditCard.ApplyDiscount(originalPrice);
-                
-                // Only display the discount (don't apply it yet)
-                CreditCard.discountApplied = false;
-                
-                if (discountedPrice < originalPrice)
-                {
-                    priceText.text = $"{discountedPrice} <s>{originalPrice}</s>";
-                }
-                else
-                {
-                    priceText.text = originalPrice.ToString();
-                }
-            }
-            else
-            {
-                priceText.text = originalPrice.ToString();
-                discountedPrice = originalPrice;
-            }
-        }
-    }
-    
-    void UpdateDiscountBadge()
-    {
-        if (discountBadge != null && discountPercentText != null)
-        {
-            if (CreditCard.hasActiveCard && !CreditCard.discountApplied && discountedPrice < originalPrice)
-            {
-                discountBadge.SetActive(true);
-                
-                int discountPercent = 0;
-                switch (CreditCard.activeCardType)
-                {
-                    case CreditCard.CardType.Bronze: discountPercent = 25; break;
-                    case CreditCard.CardType.Silver: discountPercent = 50; break;
-                    case CreditCard.CardType.Gold: discountPercent = 75; break;
-                }
-                
-                discountPercentText.text = $"-{discountPercent}%";
-            }
-            else
-            {
-                discountBadge.SetActive(false);
-            }
-        }
-    }
-    
-    void UpdateButtonState()
-    {
-        GameManager gameManager = GameManager.Instance;
-        if (gameManager != null)
-        {
-            // Use discounted price for comparison if applicable
-            int priceToCheck = (CreditCard.hasActiveCard && !CreditCard.discountApplied) ? 
-                discountedPrice : originalPrice;
-                
-            // Enable button only if player has enough money
-            purchaseButton.interactable = gameManager.score >= priceToCheck;
-        }
-    }
-    
-    void OnPurchaseClicked()
-    {
-        if (storeManager != null && !purchased)
-        {
-            // Check if a discount should be applied
-            if (CreditCard.hasActiveCard && !CreditCard.discountApplied)
-            {
-                // Now actually apply the discount (sets discountApplied to true)
-                int finalPrice = CreditCard.ApplyDiscount(originalPrice);
-                
-                // Temporarily modify the item price
-                itemData.price = finalPrice;
-                
-                // Purchase with the discounted price
-                storeManager.PurchaseItem(itemData);
-                
-                // Restore original price
-                itemData.price = originalPrice;
-            }
-            else
-            {
-                // Regular purchase
-                storeManager.PurchaseItem(itemData);
+                audioSource.PlayOneShot(purchaseSound);
             }
             
-            purchased = true;
-            
-            // Disable button after purchase
-            if (purchaseButton != null)
-                purchaseButton.interactable = false;
-                
-            // Show sold out overlay
-            if (soldOutOverlay != null)
-                soldOutOverlay.SetActive(true);
-                
-            // Hide discount badge
-            if (discountBadge != null)
-                discountBadge.SetActive(false);
+            soldOutText.gameObject.SetActive(true);
+            purchaseButton.interactable = false;
         }
     }
 }

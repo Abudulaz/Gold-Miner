@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd0e82ad996ce84a8b78d5256322a6b, type: 3}
+  m_Name: LuckyClover
+  m_EditorClassIdentifier: 
+  itemID: lucky_clover
+  itemName: Lucky Clover
+  emojiIcon: 
+  icon: {fileID: 0}
+  variants:
+  - description: Lucky Clover - Easy
+    price: 400
+    effectDescription: +5% rare item chance
+    effectValue: 5
+    secondaryValue: 0
+  - description: Lucky Clover - Medium
+    price: 800
+    effectDescription: +10% rare item chance
+    effectValue: 10
+    secondaryValue: 0
+  - description: Lucky Clover - Hard
+    price: 1200
+    effectDescription: +20% rare item chance
+    effectValue: 20
+    secondaryValue: 0

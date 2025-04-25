@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd0e82ad996ce84a8b78d5256322a6b, type: 3}
+  m_Name: StrengthDrink
+  m_EditorClassIdentifier: 
+  itemID: strength_drink
+  itemName: Strength Drink
+  emojiIcon: 
+  icon: {fileID: 0}
+  variants:
+  - description: Strength Drink - Easy
+    price: 200
+    effectDescription: +10% pull strength/speed
+    effectValue: 10
+    secondaryValue: 0
+  - description: Strength Drink - Medium
+    price: 400
+    effectDescription: +20% pull strength/speed
+    effectValue: 20
+    secondaryValue: 0
+  - description: Strength Drink - Hard
+    price: 600
+    effectDescription: +40% pull strength/speed
+    effectValue: 40
+    secondaryValue: 0

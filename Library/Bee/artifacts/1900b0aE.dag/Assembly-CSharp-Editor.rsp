@@ -382,6 +382,7 @@
 "Assets/Editor/CopyPrefabToResources.cs"
 "Assets/Scripts/Editor/CreateDynamitePrefab.cs"
 "Assets/Scripts/Editor/CreateExplosionPrefab.cs"
+"Assets/Scripts/Editor/StoreItemGenerator.cs"
 -langversion:9.0
 /deterministic
 /optimize+

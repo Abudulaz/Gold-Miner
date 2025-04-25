@@ -65,8 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\StoreItemData.cs" />
     <Compile Include="Assets\Scripts\ExplosionEffect.cs" />
     <Compile Include="Assets\Scripts\RopeStress.cs" />
+    <Compile Include="Assets\Scripts\StoreItem.cs" />
     <Compile Include="Assets\Scripts\Dynamite.cs" />
     <Compile Include="Assets\Scripts\RopeManager.cs" />
     <Compile Include="Assets\Scripts\Gold.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Assets\Scripts\Redworm.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
-    <Compile Include="Assets\Scripts\CreditCard.cs" />
     <Compile Include="Assets\Scripts\Collectible.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\FloatingText.cs" />

@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
     
     [Header("New Opposition Prefabs")]
     public GameObject redwormPrefab;
-    public GameObject creditCardPrefab;
     public GameObject ropeStressPrefab;
 
     void SpawnRandomObject()
@@ -252,56 +251,6 @@ public class GameManager : MonoBehaviour
         return redworm;
     }
     
-    // Helper method to spawn a credit card with random tier
-    private GameObject SpawnCreditCard(Vector3 position)
-    {
-        GameObject creditCard = Instantiate(creditCardPrefab, position, Quaternion.identity);
-        
-        // Assign random credit card type based on rarity
-        CreditCard creditCardComponent = creditCard.GetComponent<CreditCard>();
-        if (creditCardComponent != null)
-        {
-            float randomValue = Random.value;
-            if (randomValue < 0.6f) {
-                // 60% chance for bronze (common)
-                creditCardComponent.cardType = CreditCard.CardType.Bronze;
-            } else if (randomValue < 0.9f) {
-                // 30% chance for silver (uncommon)
-                creditCardComponent.cardType = CreditCard.CardType.Silver;
-            } else {
-                // 10% chance for gold (rare)
-                creditCardComponent.cardType = CreditCard.CardType.Gold;
-            }
-        }
-        
-        return creditCard;
-    }
-    
-    // Helper method to spawn a gold with proper size
-    private GameObject SpawnGold(Vector3 position)
-    {
-        GameObject gold = Instantiate(goldPrefab, position, Quaternion.identity);
-        
-        // Use the Gold.GoldSize enum instead of random scaling
-        Gold goldComponent = gold.GetComponent<Gold>();
-        if (goldComponent != null)
-        {
-            float randomValue = Random.value;
-            if (randomValue < 0.5f) {
-                // 50% chance for small gold (common)
-                goldComponent.size = Gold.GoldSize.Small;
-            } else if (randomValue < 0.8f) {
-                // 30% chance for medium gold (uncommon)
-                goldComponent.size = Gold.GoldSize.Medium;
-            } else {
-                // 20% chance for large gold (rare)
-                goldComponent.size = Gold.GoldSize.Large;
-            }
-        }
-        
-        return gold;
-    }
-    
     // Helper method to spawn a rope stress object with random level
     private GameObject SpawnRopeStress(Vector3 position)
     {
@@ -350,6 +299,31 @@ public class GameManager : MonoBehaviour
         }
         
         return stressObj;
+    }
+    
+    // Helper method to spawn a gold with proper size
+    private GameObject SpawnGold(Vector3 position)
+    {
+        GameObject gold = Instantiate(goldPrefab, position, Quaternion.identity);
+        
+        // Use the Gold.GoldSize enum instead of random scaling
+        Gold goldComponent = gold.GetComponent<Gold>();
+        if (goldComponent != null)
+        {
+            float randomValue = Random.value;
+            if (randomValue < 0.5f) {
+                // 50% chance for small gold (common)
+                goldComponent.size = Gold.GoldSize.Small;
+            } else if (randomValue < 0.8f) {
+                // 30% chance for medium gold (uncommon)
+                goldComponent.size = Gold.GoldSize.Medium;
+            } else {
+                // 20% chance for large gold (rare)
+                goldComponent.size = Gold.GoldSize.Large;
+            }
+        }
+        
+        return gold;
     }
     
     // Check if a position is far enough from other spawned objects
