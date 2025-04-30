@@ -11,10 +11,12 @@ public class Redworm : Collectible
     public float movementSpeed;
     public float penaltyTime;  // Time penalty when hooked
     public bool causesStun;    // Whether it causes stun effect
+    public GameObject explosionPrefab; // Added for explosion effect
     
     private Vector3 moveDirection;
-    private float boundaryWidth = 8.0f;  // Match this with GameManager's spawnAreaWidth
-    private float boundaryHeight = 6.0f; // Match this with camera's vertical boundary
+    private float boundaryWidth;      // Will match GameManager's spawnAreaWidth
+    private float boundaryHeight;     // Will match GameManager's spawnAreaHeight
+    private float boundaryYOffset;    // Will match GameManager's spawnAreaYOffset
     private float timeSinceDirectionChange = 0f;
     private float directionChangeInterval = 2f;
     private float stuckCheckInterval = 0.5f;
@@ -26,6 +28,21 @@ public class Redworm : Collectible
     
     void Start()
     {
+        // Get boundary values from GameManager
+        if (GameManager.Instance != null)
+        {
+            boundaryWidth = GameManager.Instance.spawnAreaWidth;
+            boundaryHeight = GameManager.Instance.spawnAreaHeight;
+            boundaryYOffset = GameManager.Instance.spawnAreaYOffset;
+        }
+        else
+        {
+            // Default values if GameManager is not available
+            boundaryWidth = 8.0f;
+            boundaryHeight = 4.0f;
+            boundaryYOffset = -3.0f;
+        }
+        
         // Set properties based on speed variant
         switch (speedType)
         {
@@ -83,6 +100,21 @@ public class Redworm : Collectible
             transform.localScale.y * 0.7f, 
             transform.localScale.z
         );
+        
+        // Ensure we have a 3D collider set as trigger
+        if (GetComponent<Collider>() == null)
+        {
+            // Add a box collider by default to match the elongated shape
+            BoxCollider collider = gameObject.AddComponent<BoxCollider>();
+            collider.size = new Vector3(1f, 0.5f, 0.5f); // Match the elongated shape
+            collider.isTrigger = true;
+        }
+        else
+        {
+            // Make sure existing collider is set as trigger
+            Collider existingCollider = GetComponent<Collider>();
+            existingCollider.isTrigger = true;
+        }
     }
     
     void Update()
@@ -91,12 +123,18 @@ public class Redworm : Collectible
         if (GameManager.Instance == null || GameManager.Instance.currentState != GameManager.GameState.Running)
             return;
             
+        // Check if we're at or beyond boundary before moving
+        if (IsAtBoundary())
+        {
+            ChangeDirection();
+        }
+            
         // Move the redworm
         transform.position += moveDirection * movementSpeed * Time.deltaTime;
         
-        // Change direction periodically or at boundaries
+        // Change direction periodically
         timeSinceDirectionChange += Time.deltaTime;
-        if (timeSinceDirectionChange > directionChangeInterval || IsAtBoundary())
+        if (timeSinceDirectionChange > directionChangeInterval)
         {
             ChangeDirection();
             timeSinceDirectionChange = 0f;
@@ -116,7 +154,10 @@ public class Redworm : Collectible
         // If at a boundary, move back toward center
         if (IsAtBoundary())
         {
-            Vector3 toCenter = -transform.position.normalized;
+            // Calculate direction toward center of spawn area
+            Vector3 spawnAreaCenter = new Vector3(0, boundaryYOffset, 0);
+            Vector3 toCenter = spawnAreaCenter - transform.position;
+            
             // Add some randomness so it doesn't move in a straight line
             float randomAngle = Random.Range(-30f, 30f) * Mathf.Deg2Rad;
             Vector3 randomDir = new Vector3(
@@ -125,6 +166,9 @@ public class Redworm : Collectible
                 0
             );
             moveDirection = randomDir.normalized;
+            
+            // Debug boundary hit
+            Debug.Log($"Redworm hit boundary at {transform.position}, redirecting to center");
         }
         else
         {
@@ -136,11 +180,19 @@ public class Redworm : Collectible
     
     bool IsAtBoundary()
     {
-        // Check if near the edge of the game area (both X and Y axes)
+        // Calculate spawn area boundaries considering Y offset
         float halfWidth = boundaryWidth * 0.5f;
         float halfHeight = boundaryHeight * 0.5f;
-        return (transform.position.x > halfWidth || transform.position.x < -halfWidth ||
-                transform.position.y > halfHeight || transform.position.y < -halfHeight);
+        float minX = -halfWidth;
+        float maxX = halfWidth;
+        float minY = boundaryYOffset - halfHeight;
+        float maxY = boundaryYOffset + halfHeight;
+        
+        // Add a small buffer (0.1f) to turn around before actually hitting the edge
+        bool outsideX = transform.position.x > maxX - 0.1f || transform.position.x < minX + 0.1f;
+        bool outsideY = transform.position.y > maxY - 0.1f || transform.position.y < minY + 0.1f;
+        
+        return outsideX || outsideY;
     }
     
     void CheckIfStuck()
@@ -157,9 +209,11 @@ public class Redworm : Collectible
                 if (consecStuckFrames >= stuckThreshold)
                 {
                     // We're definitely stuck, force a new direction toward center
-                    Vector3 toCenter = Vector3.zero - transform.position;
+                    Vector3 spawnAreaCenter = new Vector3(0, boundaryYOffset, 0);
+                    Vector3 toCenter = spawnAreaCenter - transform.position;
                     moveDirection = toCenter.normalized;
                     consecStuckFrames = 0;
+                    Debug.Log("Redworm stuck, forcing move to center");
                 }
             }
             else
@@ -173,27 +227,54 @@ public class Redworm : Collectible
         lastPosition = transform.position;
     }
     
+    // Use OnTriggerEnter for hook collision detection (3D version)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Hook"))
+        {
+            // Instantiate explosion effect
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
+            
+            // Apply penalty (without attaching to hook)
+            ApplyHookPenalty(); // Call the penalty logic directly
+            
+            // Add score penalty
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AddScore(value); // Apply score change (could be negative)
+            }
+
+            // Destroy the redworm
+            Destroy(gameObject);
+        }
+    }
+    
     // Override the AttachToHook method to apply penalty
     public override void AttachToHook(Transform hookTransform)
     {
-        // Apply penalty
-        StartCoroutine(ApplyHookPenalty());
+        Debug.LogWarning("Redworm AttachToHook called, but interaction should be handled by OnTriggerEnter if hook is a trigger.");
+        ApplyHookPenalty();
         
-        // We don't parent to the hook - worm escapes!
-        GameManager.Instance.AddScore(value); // Apply score change (could be negative)
+        // Add score penalty
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddScore(value);
+        }
         
-        // Destroy self after penalty applied
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject);
     }
     
-    private IEnumerator ApplyHookPenalty()
+    // Apply penalty logic
+    private void ApplyHookPenalty()
     {
         // Find the PlayerController
         PlayerController playerController = FindObjectOfType<PlayerController>();
         
         if (playerController != null)
         {
-            // Display visual feedback
             // Future enhancement: Add visual effect for player penalty
             
             // Cause stun effect on harder variants
@@ -205,9 +286,6 @@ public class Redworm : Collectible
             
             Debug.Log($"Redworm caused {penaltyTime}s time penalty!");
         }
-        
-        // Short delay before destroying
-        yield return new WaitForSeconds(0.2f);
     }
     
     void OnDrawGizmosSelected()
@@ -224,6 +302,29 @@ public class Redworm : Collectible
                 case RedwormSpeed.Fast: displaySpeed = 4f; break;
             }
             UnityEditor.Handles.Label(transform.position + Vector3.up, "Speed: " + displaySpeed);
+        }
+        else
+        {
+            // Draw movement direction in play mode
+            Debug.DrawRay(transform.position, moveDirection * 1.5f, Color.yellow);
+            
+            // Draw boundaries for debugging
+            float halfWidth = boundaryWidth * 0.5f;
+            float halfHeight = boundaryHeight * 0.5f;
+            float minX = -halfWidth;
+            float maxX = halfWidth;
+            float minY = boundaryYOffset - halfHeight;
+            float maxY = boundaryYOffset + halfHeight;
+            
+            Vector3 bottomLeft = new Vector3(minX, minY, 0);
+            Vector3 bottomRight = new Vector3(maxX, minY, 0);
+            Vector3 topLeft = new Vector3(minX, maxY, 0);
+            Vector3 topRight = new Vector3(maxX, maxY, 0);
+            
+            Debug.DrawLine(bottomLeft, bottomRight, Color.red);
+            Debug.DrawLine(bottomRight, topRight, Color.red);
+            Debug.DrawLine(topRight, topLeft, Color.red);
+            Debug.DrawLine(topLeft, bottomLeft, Color.red);
         }
         #endif
     }

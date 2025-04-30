@@ -424,3 +424,43 @@
   - Previously, StoreItemUI objects' Setup() was called before their Start() method
   - Now, the StoreManager reference is established earlier in Awake()
   - Added defensive coding to prevent similar errors in the future 
+
+## [2025-04-30 02:47:50] Redworm Explosion Effect
+**Files Changed**: Redworm.cs
+**User Request**: "Can you add ExplosionEffectPrefab @ExplosionEffect.cs for redworm so it will explode upon touched by hook, make sure @ExplosionEffect.cs works with redworm, just add this function do not change other functionality of redwrom"
+
+**Changes**:
+- Added public `explosionPrefab` field to `Redworm.cs`.
+- Implemented `OnTriggerEnter2D` to detect collision with objects tagged "Hook".
+- When the hook collides, instantiate the `explosionPrefab` at the redworm's position.
+- Called existing `ApplyHookPenalty` logic.
+- Destroyed the redworm GameObject immediately after collision and explosion.
+- Kept the old `AttachToHook` method with a warning, as `OnTriggerEnter2D` is preferred if the hook uses a trigger collider. 
+
+## [2025-04-30 02:52:42] Redworm Collision Fix
+**Files Changed**: Redworm.cs
+**User Request**: "I think hook use sphere collider which is 3d and the colider is created by script @Hook.cs, can you make redworm also use 3d colider instead so you don't have to change @Hook.cs ? because they are all actually 3d objects altough played in 2d view"
+
+**Changes**:
+- Modified Redworm.cs to use 3D colliders instead of 2D colliders
+- Added logic to automatically create a 3D BoxCollider if none exists
+- Changed OnTriggerEnter2D to OnTriggerEnter to work with the Hook's 3D SphereCollider
+- Set BoxCollider size to match redworm's elongated shape (1f, 0.5f, 0.5f)
+- Ensured all colliders are set as triggers for proper collision detection
+- Added GameManager.AddScore call back to the collision handling
+- Updated debug warning message to reflect the change from 2D to 3D
+- This change ensures proper collision detection between the redworm and hook 
+
+## [2025-04-30 02:56:53] Redworm Boundary Restriction
+**Files Changed**: Redworm.cs
+**User Request**: "Can you also make sure @Redworm.cs do not wander beyond the spawn area of @GameManager.cs ?"
+
+**Changes**:
+- Modified Redworm.cs to respect the exact spawn area boundaries defined in GameManager
+- Added code to fetch the actual spawn area values (width, height, and Y offset) from GameManager.Instance
+- Completely redesigned the IsAtBoundary() method to use the correct boundaries with Y offset
+- Added a small buffer zone (0.1 units) to make redworms turn around before reaching the actual edge
+- Improved the ChangeDirection() method to aim toward the center of the spawn area rather than world origin
+- Updated CheckIfStuck() to also aim toward spawn area center instead of world origin
+- Added visual debugging features: movement direction ray and boundary visualization in play mode
+- Added informative console logs for boundary hits and stuck detection events 

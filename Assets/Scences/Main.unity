@@ -934,14 +934,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  gameTime: 1
+  gameTime: 50
   currentState: 0
   goldPrefab: {fileID: 3875446885824176971, guid: 356344035690cdb469388c4248ee5574, type: 3}
   rockPrefab: {fileID: 672247997467503658, guid: 5d7fde4c0b2198f45b38ac7fe995a151, type: 3}
   initialObjectCount: 20
-  spawnAreaWidth: 17.6
-  spawnAreaHeight: 6.79
-  spawnAreaYOffset: -1.55
+  spawnAreaWidth: 17.8
+  spawnAreaHeight: 5.65
+  spawnAreaYOffset: -2.14
   redwormPrefab: {fileID: 7948353482517207383, guid: a4ad4e3b7f045d1429a72f210a712f30, type: 3}
   ropeStressPrefab: {fileID: 5225666524966128355, guid: 2992a4d7088cddc49899ce826d7cf485, type: 3}
 --- !u!4 &1420850904
