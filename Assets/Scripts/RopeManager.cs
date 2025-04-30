@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Add this for Canvas support
+using TMPro;
 
 public class RopeManager : MonoBehaviour
 {
@@ -20,17 +21,30 @@ public class RopeManager : MonoBehaviour
     [Header("Rope Break Settings")]
     public float breakThreshold = 2.0f;   // Increased from 1.5f to 2.0f (200% of max stress causes breaks)
     public float repairTime = 1.5f;       // Further reduced from 2.0f to 1.5f seconds
+    public float freeRopeDelay = 3.0f;    // Time in seconds to generate a free rope
+    
+    [Header("Rope Inventory")]
+    public int ropesCount = 3;            // Starting number of ropes
+    public TextMeshProUGUI ropesCountText; // UI element to display rope count
     
     // Internal state
     private float currentStress = 0f;
     private bool isRepairing = false;
     private LineRenderer lineRenderer; // Reference to the rope's LineRenderer
     private Color originalRopeColor;
+    private Color originalRopesCountColor; // Store original UI text color
+    private bool isGeneratingFreeRope = false; // Track if free rope countdown is active
+    private Coroutine freeRopeCoroutine = null; // Reference to the countdown coroutine
     
     // Properties
     public float CurrentStress { get { return currentStress; } }
     public float StressPercentage { get { return currentStress / maxStress; } }
     public bool IsRepairing { get { return isRepairing; } }
+    public int RopesCount { get { return ropesCount; } }
+    
+    // Event that UI or GameManager can subscribe to when rope count changes
+    public delegate void RopeCountChangeHandler(int newCount);
+    public event RopeCountChangeHandler OnRopeCountChanged;
     
     void Start()
     {
@@ -41,6 +55,15 @@ public class RopeManager : MonoBehaviour
             lineRenderer = player.lineRenderer;
             originalRopeColor = lineRenderer.startColor;
         }
+        
+        // Store original UI text color
+        if (ropesCountText != null)
+        {
+            originalRopesCountColor = ropesCountText.color;
+        }
+        
+        // Update UI on start
+        UpdateRopesCountUI();
     }
     
     void Update()
@@ -60,7 +83,7 @@ public class RopeManager : MonoBehaviour
     // Add stress from pulls or stress objects
     public void AddStress(float stressAmount)
     {
-        // Skip if repairing
+        // Skip if repairing or generating free rope (stress shouldn't accumulate infinitely if broken)
         if (isRepairing)
             return;
             
@@ -139,27 +162,60 @@ public class RopeManager : MonoBehaviour
         AddStress(pullStress);
     }
     
+    // Add ropes to the player's inventory
+    public void AddRopes(int count)
+    {
+        ropesCount += count;
+        // Trigger event
+        OnRopeCountChanged?.Invoke(ropesCount);
+        
+        // If we were generating a free rope, stop it now that we have ropes
+        if (isGeneratingFreeRope && freeRopeCoroutine != null)
+        {
+            StopCoroutine(freeRopeCoroutine);
+            isGeneratingFreeRope = false;
+            freeRopeCoroutine = null;
+            Debug.Log("Free rope generation cancelled due to receiving ropes.");
+        }
+        
+        UpdateRopesCountUI(); // This will restore normal UI color and text
+        Debug.Log($"Added {count} ropes! New count: {ropesCount}");
+    }
+    
     // Handle rope breaking
     private void BreakRope()
     {
-        if (isRepairing)
+        if (isRepairing) // Already handling a break
             return;
-            
-        Debug.Log("Rope broke! Repairing...");
-        isRepairing = true;
+        
+        // Decrement rope count
+        ropesCount--;
+        OnRopeCountChanged?.Invoke(ropesCount);
+        UpdateRopesCountUI(); // Show "Ropes: 0" briefly
+        
+        Debug.Log($"Rope broke! {ropesCount} ropes left.");
+        
+        isRepairing = true; // Start the repair process for the *current* break
         
         // Notify player controller
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player != null)
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        if (playerController != null)
         {
-            player.OnRopeBreak();
-            
-            // Show a "Stress Limit!" floating text near the player
-            ShowRopeStressText(player.transform.position);
+            playerController.OnRopeBreak();
+            ShowRopeStressText(playerController.transform.position); // Show "Stress Limit!" text
         }
         
-        // Start repair coroutine
+        // Start repair coroutine (handles stress reset and player state after delay)
         StartCoroutine(RepairRope());
+        
+        // Check if we are completely out of ropes AND not already generating one
+        if (ropesCount <= 0 && !isGeneratingFreeRope)
+        {
+            Debug.Log("Out of ropes! Starting free rope generation...");
+            isGeneratingFreeRope = true;
+            freeRopeCoroutine = StartCoroutine(GenerateFreeRopeCoroutine());
+        }
+        // Removed the old logic to open store or show permanent "Out of Ropes!" message
     }
     
     // Show stress limit exceeded text
@@ -179,7 +235,59 @@ public class RopeManager : MonoBehaviour
         }
     }
     
-    // Repair rope after break
+    // Update the UI text for rope count
+    private void UpdateRopesCountUI()
+    {
+        if (ropesCountText != null)
+        {
+            ropesCountText.text = "Ropes: " + ropesCount;
+            // Restore original color only if not in the process of generating a free rope
+            if (!isGeneratingFreeRope)
+            {
+                ropesCountText.color = originalRopesCountColor;
+            }
+        }
+    }
+    
+    // Coroutine to handle the delay and generation of a free rope
+    private IEnumerator GenerateFreeRopeCoroutine()
+    {
+        if (ropesCountText == null) yield break; // Exit if no UI text
+        
+        float timer = freeRopeDelay;
+        ropesCountText.color = Color.red; // Set text to red during countdown
+        
+        while (timer > 0)
+        {
+            // Ensure we still need the free rope (e.g., player didn't buy one)
+            if (ropesCount > 0)
+            {
+                Debug.Log("Rope count increased during countdown. Stopping free rope generation.");
+                isGeneratingFreeRope = false;
+                freeRopeCoroutine = null;
+                UpdateRopesCountUI(); // Restore normal UI
+                yield break; // Exit coroutine
+            }
+
+            ropesCountText.text = $"Next Rope: {timer:F1}s";
+            timer -= Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
+        
+        // Check one last time if we got ropes somehow
+        if (ropesCount <= 0)
+        {
+             ropesCount = 1; // Grant the free rope
+             OnRopeCountChanged?.Invoke(ropesCount);
+             Debug.Log("Generated a free rope!");
+        }
+
+        isGeneratingFreeRope = false;
+        freeRopeCoroutine = null;
+        UpdateRopesCountUI(); // Update UI to show "Ropes: 1" and restore color
+    }
+    
+    // Repair rope after break (resets stress, notifies player)
     private IEnumerator RepairRope()
     {
         // Wait for repair time
@@ -187,19 +295,19 @@ public class RopeManager : MonoBehaviour
         
         // Reset stress
         currentStress = 0;
-        isRepairing = false;
+        isRepairing = false; // Repair is complete for the broken instance
         
         // Update visual feedback
         UpdateRopeColor();
         
-        // Notify player controller
+        // Notify player controller that they can use the rope again
         PlayerController player = FindObjectOfType<PlayerController>();
         if (player != null)
         {
             player.OnRopeRepaired();
         }
         
-        Debug.Log("Rope repaired!");
+        Debug.Log("Rope repaired and ready!");
     }
     
     // Update rope color based on current stress

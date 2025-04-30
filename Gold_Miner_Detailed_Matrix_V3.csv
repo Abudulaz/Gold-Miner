@@ -1,0 +1,51 @@
+Component,Variable,Base Value / Type,Level Scaling / Variant Info,Notes
+PlayerController,SwingSpeed,2.0,Base + (0.1 * (Level-1)),Max: 5.0
+PlayerController,HookSpeed,5.0,None,
+PlayerController,MaxHookDistance,10.0,None,
+PlayerController,BasePullSpeed,3.0,None,Actual speed depends on weight/penalties
+PlayerController,MinPullSpeedMultiplier,0.4,None,40% of Base Speed
+PlayerController,WeightCapForStress,25.0,None,Max weight used for stress calculation
+---
+RopeManager,MaxStress,500,None,Upgradeable via Store
+RopeManager,StressDecayRate,2.0,None,
+RopeManager,StressPerPull,0.1,None,
+RopeManager,StressPerWeightUnit,0.01,None,
+RopeManager,BreakThresholdMultiplier,2.0,None,200% of Max Stress
+RopeManager,RepairTime,1.5,None,
+RopeManager,StartingRopes,3,None,
+RopeManager,FreeRopeDelay,3.0,None,Activates when Ropes = 0
+---
+Rocks,SizeVariants,"Small, Medium, Large",Scales: 0.6x, 0.9x, 1.4x,
+Rocks,Weight,"6, 12, 20","Base * (1 + (0.10 * (Level-1)))",For Small, Medium, Large
+Rocks,Value,"5, 10, 15","Base * (1 + (0.15 * (Level-1)))",For Small, Medium, Large
+Rocks,BaseSpawnChance,~50%,None,Part of random pool
+Rocks,MinSpawnCount,5,None,Guaranteed per level
+---
+Gold,SizeVariants,"Small, Medium, Large",Scales: 0.6x, 0.9x, 1.4x,
+Gold,Weight,"10, 18, 28","Base * (1 + (0.15 * (Level-1)))",For Small, Medium, Large
+Gold,Value,"100, 200, 300","Base * (1 + (0.25 * (Level-1)))",For Small, Medium, Large
+Gold,BaseSpawnChance,Variable,Decreases as Redworm chance increases,
+Gold,MinSpawnCount,5,None,Guaranteed per level
+---
+Redworms,SpeedVariants,"Slow, Medium, Fast",Distribution scales with Level,See notes below
+Redworms,Value,25,None,Assumed constant for now
+Redworms,Behavior,Wanders/Explodes,Explodes on Hook contact,
+Redworms,BaseSpawnChance,15%,Base + (1% * (Level-1)),Max 35%
+Redworms,MinSpawnCount,1,None,Guaranteed per level
+Redworms (Speed Dist.),SlowChance,50%,Decreases as others increase,
+Redworms (Speed Dist.),MediumChance,30%,Base + (1% * (Level-1)),Max 50%
+Redworms (Speed Dist.),FastChance,20%,Base + (2% * (Level-1)),Max 60%
+---
+RopeStressZones,Appearance,Invisible,Trigger Collider,
+RopeStressZones,TypeVariants,"Pressure, Tension, Shear",Enum,
+RopeStressZones,BaseImpact,"0.1, 0.2, 0.3",None,For Pressure, Tension, Shear
+RopeStressZones,AppliedMultiplier,"0.25, 0.4, 0.6",None,In RopeManager
+RopeStressZones,PlayerPenalties (Pressure),"0.02 Str, 0.0 Spd, No Break",None,
+RopeStressZones,PlayerPenalties (Tension),"0.05 Str, 0.02 Spd, No Break",None,
+RopeStressZones,PlayerPenalties (Shear),"0.08 Str, 0.05 Spd, Yes Break",None,
+RopeStressZones,BaseSpawnChance,Variable,Part of random pool,
+---
+StoreItem_Ropes,Price,50,Base + (10 * Level),
+StoreItem_Ropes,Quantity,"1, 2, 3",Based on Level Brackets (1-3, 4-6, 7+),
+StoreItem_RopeReinforcement,Effect,Reduces Stress Accumulation,TBD - Effect Scale/Cost,
+StoreItem_BetterRope,Effect,Increases Max Stress,TBD - Effect Scale/Cost,

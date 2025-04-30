@@ -383,6 +383,7 @@
 -analyzer:"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Unity/Hub/Editor/2021.3.4f1c1/2022.3.60f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Editor/CopyPrefabToResources.cs"
+"Assets/Editor/LevelUISetup.cs"
 "Assets/Scripts/Editor/CreateDynamitePrefab.cs"
 "Assets/Scripts/Editor/CreateExplosionPrefab.cs"
 "Assets/Scripts/Editor/StoreItemGenerator.cs"

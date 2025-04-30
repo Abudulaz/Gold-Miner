@@ -1,8 +1,3 @@
-Variant,Claw Speed (units/sec),Retract Speed (units/sec),Pulling Strength (max weight),Missed Retract Delay (sec),Energy Consumption per Grab,External Forces Impact,Rotation Speed (deg/sec),Accuracy Deviation (degrees),Cooldown Between Grabs (sec)
-Basic Claw,5,3,10,1.5,0,None,30,5,1.2
-Upgraded Claw,7,5,15,1,1,Medium,45,3,0.8
-Advanced Claw,9,7,20,0.5,2,High,60,2,0.5
-
 Obstacle,Variant,Weight (units),Effect,Spawn Rate (per minute),Object Movement Speed (units/sec),Gold Value (coins),Difficulty Level,,
 Gold,Small,12,Medium value/Medium weight,4,0,100,Easy,,
 Gold,Medium,22,High value/Heavy weight,3,0,200,Medium,,

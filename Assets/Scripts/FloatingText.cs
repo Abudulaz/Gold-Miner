@@ -9,6 +9,7 @@ public class FloatingText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private string message = "Rope Broke!";
     [SerializeField] private float lifetime = 2f;
+    [SerializeField] private Color textColor = Color.white;
 
     // Animation Settings
     [SerializeField] private float moveSpeed = 0.5f;
@@ -28,6 +29,7 @@ public class FloatingText : MonoBehaviour
         }
 
         textComponent.text = message;
+        textComponent.color = textColor;
         
         // Make sure we have a canvas group for fading
         canvasGroup = GetComponent<CanvasGroup>();
@@ -77,7 +79,7 @@ public class FloatingText : MonoBehaviour
     }
 
     // Static method to create the floating text
-    public static FloatingText Create(Vector3 position, Canvas parentCanvas, string message = null)
+    public static FloatingText Create(Vector3 position, Canvas parentCanvas, string message = null, Color? color = null, float? customLifetime = null)
     {
         // Load the prefab
         GameObject prefab = Resources.Load<GameObject>("FloatingTextPrefab");
@@ -96,12 +98,24 @@ public class FloatingText : MonoBehaviour
         {
             floatingText.message = message;
         }
+        
+        // Set the color if provided
+        if (color.HasValue)
+        {
+            floatingText.textColor = color.Value;
+        }
+        
+        // Set custom lifetime if provided
+        if (customLifetime.HasValue)
+        {
+            floatingText.lifetime = customLifetime.Value;
+        }
 
         return floatingText;
     }
 
     // Overload to create from world position
-    public static FloatingText CreateWorldToUI(Vector3 worldPosition, Canvas targetCanvas, Camera camera, string message = null)
+    public static FloatingText CreateWorldToUI(Vector3 worldPosition, Canvas targetCanvas, Camera camera, string message = null, Color? color = null, float? customLifetime = null)
     {
         // Convert world position to screen position
         Vector3 screenPos = camera.WorldToScreenPoint(worldPosition);
@@ -116,6 +130,6 @@ public class FloatingText : MonoBehaviour
         Vector3 uiPosition = targetCanvas.transform.TransformPoint(localPoint);
         
         // Create the floating text at the UI position
-        return Create(uiPosition, targetCanvas, message);
+        return Create(uiPosition, targetCanvas, message, color, customLifetime);
     }
 } 

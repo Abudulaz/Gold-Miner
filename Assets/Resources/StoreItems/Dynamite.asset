@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: dynamite
   itemName: Dynamite
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Dynamite - Easy

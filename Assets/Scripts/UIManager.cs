@@ -7,13 +7,15 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [Header("UI References")]
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI moneyText;
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI ropesCountText;  // UI element to display rope count
+    public TextMeshProUGUI levelText;       // UI element to display current level
     public GameObject gameOverPanel;
     public GameObject pausePanel;
     
     [Header("Game Over UI")]
-    public TextMeshProUGUI finalScoreText;
+    public TextMeshProUGUI finalMoneyText;
     public Button restartButton;
     
     private GameManager gameManager;
@@ -31,6 +33,19 @@ public class UIManager : MonoBehaviour
         
         // Find RopeManager
         ropeManager = FindObjectOfType<RopeManager>();
+        
+        // Subscribe to rope count changes
+        if (ropeManager != null && ropesCountText != null)
+        {
+            // Set initial rope count display
+            UpdateRopesCountUI(ropeManager.RopesCount);
+            
+            // Subscribe to rope count changes
+            ropeManager.OnRopeCountChanged += UpdateRopesCountUI;
+            
+            // Assign the text element to RopeManager
+            ropeManager.ropesCountText = ropesCountText;
+        }
         
         // Hide UI panels initially
         if (gameOverPanel != null)
@@ -57,6 +72,21 @@ public class UIManager : MonoBehaviour
         {
             gameManager.OnGameStateChanged -= HandleGameStateChanged;
         }
+        
+        // Unsubscribe from rope count changes
+        if (ropeManager != null)
+        {
+            ropeManager.OnRopeCountChanged -= UpdateRopesCountUI;
+        }
+    }
+    
+    // Update rope count display
+    private void UpdateRopesCountUI(int count)
+    {
+        if (ropesCountText != null)
+        {
+            ropesCountText.text = "Ropes: " + count;
+        }
     }
     
     private void HandleGameStateChanged(GameManager.GameState newState)
@@ -82,6 +112,12 @@ public class UIManager : MonoBehaviour
                 if (gameOverPanel != null) gameOverPanel.SetActive(false);
                 if (pausePanel != null) pausePanel.SetActive(false);
                 break;
+                
+            case GameManager.GameState.NextLevel:
+                // Handle UI for next level transition if needed
+                if (gameOverPanel != null) gameOverPanel.SetActive(false);
+                if (pausePanel != null) pausePanel.SetActive(false);
+                break;
         }
     }
     
@@ -89,10 +125,10 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
         {
-            // Update score text
-            if (scoreText != null)
+            // Update money text
+            if (moneyText != null)
             {
-                scoreText.text = "Score: " + gameManager.score;
+                moneyText.text = "Money: " + gameManager.money;
             }
             
             // Update time text
@@ -100,6 +136,12 @@ public class UIManager : MonoBehaviour
             {
                 float timeRemaining = gameManager.timeRemaining;
                 timeText.text = "Time: " + Mathf.CeilToInt(timeRemaining);
+            }
+            
+            // Update level text
+            if (levelText != null)
+            {
+                levelText.text = "Level: " + gameManager.currentLevel;
             }
             
             // Check for pause input
@@ -116,10 +158,10 @@ public class UIManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
             
-            // Update final score
-            if (finalScoreText != null)
+            // Update final money display
+            if (finalMoneyText != null)
             {
-                finalScoreText.text = "Final Score: " + gameManager.score;
+                finalMoneyText.text = "Final Money: " + gameManager.money;
             }
         }
     }

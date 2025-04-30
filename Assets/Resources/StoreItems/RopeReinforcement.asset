@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: rope_reinforcement
   itemName: Rope Reinforcement
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Rope Reinforcement - Easy

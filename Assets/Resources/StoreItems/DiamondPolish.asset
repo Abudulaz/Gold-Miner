@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: diamond_polish
   itemName: Diamond Polish
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Diamond Polish - Easy

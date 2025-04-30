@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [Header("Hook Settings")]
     public GameObject hookPrefab;
     public float swingSpeed = 2.0f;
+    public float swingSpeedLevelIncreaseFactor = 0.1f; // How much faster swing gets per level
+    public float maxSwingSpeed = 5.0f; // Maximum swing speed limit
     public float hookSpeed = 5.0f;
     public float maxHookDistance = 10.0f;
     public float pullSpeed = 3.0f;
@@ -66,6 +68,9 @@ public class PlayerController : MonoBehaviour
         // Decay penalties over time
         DecayPenalties();
         
+        // Validate state consistency
+        ValidateState();
+        
         // Only process hook logic if the game is running
         if (GameManager.Instance != null && GameManager.Instance.currentState == GameManager.GameState.Running)
         {
@@ -113,8 +118,16 @@ public class PlayerController : MonoBehaviour
     
     void SwingHook()
     {
+        // Calculate adjusted swing speed based on level
+        float adjustedSwingSpeed = swingSpeed;
+        if (GameManager.Instance != null) {
+            adjustedSwingSpeed = swingSpeed + (swingSpeedLevelIncreaseFactor * (GameManager.Instance.currentLevel - 1));
+            // Clamp the speed to the maximum
+            adjustedSwingSpeed = Mathf.Min(adjustedSwingSpeed, maxSwingSpeed); 
+        }
+        
         // Calculate swing angle
-        swingAngle += swingSpeed * swingDirection * Time.deltaTime;
+        swingAngle += adjustedSwingSpeed * swingDirection * Time.deltaTime;
         
         // Reverse direction when reaching max angle
         if (Mathf.Abs(swingAngle) >= maxSwingAngle)
@@ -238,7 +251,7 @@ public class PlayerController : MonoBehaviour
                     if (GameManager.Instance != null)
                     {
                 int adjustedValue = Mathf.RoundToInt(caughtObject.value * Collectible.valueMultiplier);
-                GameManager.Instance.AddScore(adjustedValue);
+                        GameManager.Instance.AddMoney(adjustedValue);
                     }
                 
                 // Detach the object before destroying it
@@ -273,6 +286,13 @@ public class PlayerController : MonoBehaviour
     public void CatchObject(Collectible obj)
     {
         Debug.Log("CatchObject called with: " + obj.gameObject.name + ", current state: " + currentState);
+        
+        // Additional safeguard: if we already have an object, ignore this call
+        if (caughtObject != null)
+        {
+            Debug.LogWarning("Ignoring CatchObject() call - already have an object attached");
+            return;
+        }
         
         if (currentState == HookState.Extending)
         {
@@ -335,6 +355,51 @@ public class PlayerController : MonoBehaviour
             // Drop any caught object
             if (caughtObject != null)
             {
+                // Get the spawn area boundaries from GameManager
+                float spawnWidth = GameManager.Instance.spawnAreaWidth;
+                float spawnHeight = GameManager.Instance.spawnAreaHeight;
+                float spawnYOffset = GameManager.Instance.spawnAreaYOffset;
+                Vector3 spawnCenter = new Vector3(0, spawnYOffset, 0);
+                
+                // Get current position of the caught object
+                Vector3 objectPos = caughtObject.transform.position;
+                bool isOutsideSpawnArea = false;
+                
+                // Check if object is outside spawn area boundaries
+                if (objectPos.x < -spawnWidth/2 || objectPos.x > spawnWidth/2 ||
+                    objectPos.y < spawnYOffset - spawnHeight/2 || objectPos.y > spawnYOffset + spawnHeight/2)
+                {
+                    isOutsideSpawnArea = true;
+                    
+                    // Calculate nearest point in spawn area
+                    Vector3 newPos = objectPos;
+                    
+                    // Clamp X within spawn width
+                    newPos.x = Mathf.Clamp(newPos.x, -spawnWidth/2, spawnWidth/2);
+                    
+                    // Clamp Y within spawn height + offset
+                    newPos.y = Mathf.Clamp(newPos.y, spawnYOffset - spawnHeight/2, spawnYOffset + spawnHeight/2);
+                    
+                    // Teleport object to nearest point in spawn area
+                    caughtObject.transform.position = newPos;
+                    
+                    Debug.Log($"Teleported dropped object from {objectPos} to {newPos} (inside spawn area)");
+                    
+                    // Create floating text to indicate teleport
+                    Canvas mainCanvas = FindObjectOfType<Canvas>();
+                    if (mainCanvas != null && Camera.main != null)
+                    {
+                        FloatingText.CreateWorldToUI(
+                            newPos, 
+                            mainCanvas, 
+                            Camera.main, 
+                            "Item Teleported!",
+                            Color.cyan,
+                            1.5f
+                        );
+                    }
+                }
+                
                 caughtObject.Detach();
                 caughtObject = null;  // Don't destroy the object, just detach it
             }
@@ -387,6 +452,14 @@ public class PlayerController : MonoBehaviour
             lineRenderer.enabled = true;
         }
         
+        // Double-check no object is still caught
+        if (caughtObject != null)
+        {
+            Debug.LogWarning("Object still attached during rope repair! Detaching...");
+            caughtObject.Detach();
+            caughtObject = null;
+        }
+        
         // Reset hook position
         hook.transform.position = transform.position + Vector3.down;
         
@@ -405,6 +478,25 @@ public class PlayerController : MonoBehaviour
         if (hookSpeedPenalty > 0)
         {
             hookSpeedPenalty = Mathf.Max(0, hookSpeedPenalty - (penaltyDecayRate * Time.deltaTime));
+        }
+    }
+    
+    // Validate state consistency - call this in Update
+    private void ValidateState()
+    {
+        // If in Swinging state but somehow we have a caught object, detach it
+        if (currentState == HookState.Swinging && caughtObject != null)
+        {
+            Debug.LogWarning("INCONSISTENCY DETECTED: Object attached while in Swinging state! Detaching...");
+            caughtObject.Detach();
+            caughtObject = null;
+        }
+        
+        // If in Pulling state but lost our object, switch to Retracting
+        if (currentState == HookState.Pulling && caughtObject == null)
+        {
+            Debug.LogWarning("INCONSISTENCY DETECTED: No object while in Pulling state! Switching to Retracting...");
+            currentState = HookState.Retracting;
         }
     }
 }

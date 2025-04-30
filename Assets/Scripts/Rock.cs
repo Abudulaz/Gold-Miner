@@ -9,29 +9,36 @@ public class Rock : Collectible
     [Header("Rock Settings")]
     public RockSize size = RockSize.Small;
     
+    // Base values for different rock sizes
+    private readonly float[] baseWeights = { 6.0f, 12.0f, 20.0f };
+    private readonly int[] baseValues = { 5, 10, 15 };
+    private readonly float[] baseScales = { 0.6f, 0.9f, 1.4f };
+    
+    // Level scaling factors
+    private readonly float weightLevelMultiplier = 0.1f; // 10% increase per level
+    private readonly float valueLevelMultiplier = 0.15f; // 15% increase per level
+    
     void Start()
     {
-        // Set rock properties based on size variant
-        switch (size)
-        {
-            case RockSize.Small:
-                value = 5;
-                weight = 8.0f;
-                transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                break;
-                
-            case RockSize.Medium:
-                value = 10;
-                weight = 15.0f;
-                transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                break;
-                
-            case RockSize.Large:
-                value = 15;
-                weight = 25.0f;
-                transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
-                break;
-        }
+        // Get current level from GameManager
+        int currentLevel = GameManager.Instance ? GameManager.Instance.currentLevel : 1;
+        
+        // Get base values according to size
+        int sizeIndex = (int)size;
+        float baseWeight = baseWeights[sizeIndex];
+        int baseValue = baseValues[sizeIndex];
+        float baseScale = baseScales[sizeIndex];
+        
+        // Apply level-based scaling
+        float levelWeightFactor = 1 + (weightLevelMultiplier * (currentLevel - 1));
+        float levelValueFactor = 1 + (valueLevelMultiplier * (currentLevel - 1));
+        
+        // Set final values
+        weight = baseWeight * levelWeightFactor;
+        value = Mathf.RoundToInt(baseValue * levelValueFactor);
+        transform.localScale = new Vector3(baseScale, baseScale, baseScale);
+        
+        Debug.Log($"Rock {size}: Level {currentLevel}, Weight {weight}, Value {value}");
         
         // Set rock appearance (darker for heavier rocks)
         if (GetComponent<Renderer>() != null)
@@ -48,14 +55,26 @@ public class Rock : Collectible
         #if UNITY_EDITOR
         if (!Application.isPlaying)
         {
-            float displayWeight = 0;
-            switch (size)
-            {
-                case RockSize.Small: displayWeight = 8.0f; break;
-                case RockSize.Medium: displayWeight = 15.0f; break;
-                case RockSize.Large: displayWeight = 25.0f; break;
-            }
-            UnityEditor.Handles.Label(transform.position + Vector3.up, "Weight: " + displayWeight);
+            // Get current level from GameManager or use 1 if not available
+            int currentLevel = 1;
+            if (GameManager.Instance)
+                currentLevel = GameManager.Instance.currentLevel;
+            
+            // Get base values according to size
+            int sizeIndex = (int)size;
+            float baseWeight = baseWeights[sizeIndex];
+            int baseValue = baseValues[sizeIndex];
+            
+            // Apply level-based scaling
+            float levelWeightFactor = 1 + (weightLevelMultiplier * (currentLevel - 1));
+            float levelValueFactor = 1 + (valueLevelMultiplier * (currentLevel - 1));
+            
+            // Calculate display values
+            float displayWeight = baseWeight * levelWeightFactor;
+            int displayValue = Mathf.RoundToInt(baseValue * levelValueFactor);
+            
+            UnityEditor.Handles.Label(transform.position + Vector3.up, 
+                $"Weight: {displayWeight:F1}, Value: {displayValue}, Level: {currentLevel}");
         }
         #endif
     }

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: rock_collector's_book
   itemName: Rock Collector's Book
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Rock Collector's Book - Easy

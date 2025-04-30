@@ -69,6 +69,13 @@ public class StoreItemUI : MonoBehaviour
         bool isOwned = storeManager.PlayerOwnsItem(storeItem.itemID);
         soldOutText.gameObject.SetActive(isOwned);
         purchaseButton.interactable = !isOwned;
+        
+        // Register click event handler - this was missing!
+        purchaseButton.onClick.RemoveAllListeners();
+        purchaseButton.onClick.AddListener(OnPurchaseClicked);
+        
+        // Log for debugging
+        Debug.Log($"Set up store item: {storeItem.itemName}, ID: {storeItem.itemID}, Button registered: {purchaseButton != null}");
     }
 
     private void Update()

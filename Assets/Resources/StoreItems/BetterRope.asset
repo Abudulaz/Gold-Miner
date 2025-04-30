@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: better_rope
   itemName: Better Rope
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Better Rope - Easy

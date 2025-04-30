@@ -17,6 +17,9 @@ public class StoreManager : MonoBehaviour
     public StoreItemData[] storeItemsData;    // ScriptableObject item data
     private List<StoreItem> availableItems = new List<StoreItem>();
     
+    [Header("Mandatory Items")]
+    public string spareRopesItemID = "spare_ropes";  // ID for the rope item that's always available
+    
     [Header("Store Generation Settings")]
     [Tooltip("Minimum number of items to display in the store")]
     [Range(1, 10)]
@@ -31,10 +34,6 @@ public class StoreManager : MonoBehaviour
     
     [Tooltip("Whether to ensure all item types appear at least once before repeating")]
     public bool ensureVariety = true;
-    
-    [Header("Game Settings")]
-    [Tooltip("0 = Easy, 1 = Medium, 2 = Hard")]
-    public int difficultyLevel = 0;       // Current difficulty level
     
     private GameManager gameManager;
     private PlayerController playerController;
@@ -61,6 +60,17 @@ public class StoreManager : MonoBehaviour
         // Add continue button listener
         if (continueButton != null)
             continueButton.onClick.AddListener(CloseStore);
+    }
+    
+    // Get the current difficulty level based on GameManager.currentLevel
+    private int GetDifficultyLevel()
+    {
+        if (gameManager != null)
+        {
+            // Simple scaling: Level 1-3: Easy (0), Level 4-6: Medium (1), Level 7+: Hard (2)
+            return Mathf.Clamp((gameManager.currentLevel - 1) / 3, 0, 2);
+        }
+        return 0; // Default to easy if GameManager not available
     }
     
     void OnDestroy()
@@ -94,8 +104,42 @@ public class StoreManager : MonoBehaviour
                 SelectRandomStoreItems();
             }
             
+            // Ensure spare ropes item is always available
+            EnsureSpareRopesAvailable();
+            
             PopulateStoreItems();
             UpdateMoneyDisplay();
+        }
+    }
+    
+    // Ensure the spare ropes item is always available in the store
+    private void EnsureSpareRopesAvailable()
+    {
+        // First check if it's already in the available items
+        bool ropeItemExists = availableItems.Any(item => item.itemID == spareRopesItemID);
+        
+        if (!ropeItemExists)
+        {
+            // Find the item data
+            StoreItemData ropeItemData = System.Array.Find(storeItemsData, data => 
+                data != null && data.itemID == spareRopesItemID);
+                
+            if (ropeItemData != null)
+            {
+                // Add to available items using current difficulty level derived from GameManager.currentLevel
+                StoreItem ropeItem = new StoreItem(ropeItemData, GetDifficultyLevel());
+                
+                // Override the price to be based directly on current level
+                // Base price: 50 + 10 per level (first level: 60, second: 70, etc.)
+                ropeItem.price = 50 + (gameManager.currentLevel * 10);
+                
+                availableItems.Add(ropeItem);
+                Debug.Log($"Added mandatory spare ropes item to store at price: {ropeItem.price}");
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find spare ropes item with ID '{spareRopesItemID}'");
+            }
         }
     }
     
@@ -104,15 +148,8 @@ public class StoreManager : MonoBehaviour
         if (storePanel != null)
             storePanel.SetActive(false);
             
-        // Set the game back to running or game over based on time
-        if (gameManager.timeRemaining > 0)
-        {
-            gameManager.SetGameState(GameManager.GameState.Running);
-        }
-        else
-        {
-            gameManager.SetGameState(GameManager.GameState.GameOver);
-        }
+        // Proceed to next level (GameManager will handle the details)
+        gameManager.SetGameState(GameManager.GameState.NextLevel);
     }
     
     // Select a random subset of items to display in the store
@@ -126,9 +163,9 @@ public class StoreManager : MonoBehaviour
         List<StoreItem> allItems = new List<StoreItem>();
         foreach (var itemData in storeItemsData)
         {
-            if (itemData != null)
+            if (itemData != null && itemData.itemID != spareRopesItemID) // Skip rope item as it's added separately
             {
-                allItems.Add(new StoreItem(itemData, difficultyLevel));
+                allItems.Add(new StoreItem(itemData, GetDifficultyLevel()));
             }
         }
         
@@ -195,9 +232,12 @@ public class StoreManager : MonoBehaviour
             // If item data exists and player doesn't already own it, add to available items
             if (itemData != null && !PlayerOwnsItem(itemID))
             {
-                availableItems.Add(new StoreItem(itemData, difficultyLevel));
+                availableItems.Add(new StoreItem(itemData, GetDifficultyLevel()));
             }
         }
+        
+        // Ensure the rope item is always in the store
+        EnsureSpareRopesAvailable();
         
         // Update the UI if the store is active
         if (storePanel != null && storePanel.activeSelf)
@@ -224,7 +264,7 @@ public class StoreManager : MonoBehaviour
             randomizeItems = false;
             
             // Create and add the item
-            StoreItem newItem = new StoreItem(itemData, difficultyLevel);
+            StoreItem newItem = new StoreItem(itemData, GetDifficultyLevel());
             availableItems.Add(newItem);
             
             // Update the UI if the store is active
@@ -262,6 +302,10 @@ public class StoreManager : MonoBehaviour
     // Check if player owns an item by ID
     public bool PlayerOwnsItem(string itemID)
     {
+        // Spare ropes are always available (can be purchased multiple times)
+        if (itemID == spareRopesItemID)
+            return false;
+            
         return purchasedItems.Contains(itemID);
     }
     
@@ -274,18 +318,21 @@ public class StoreManager : MonoBehaviour
             return false;
             
         // Check if player has enough money
-        if (gameManager.score < price)
+        if (gameManager.money < price)
             return false;
             
-        // Check if player already owns this item
-        if (PlayerOwnsItem(itemID))
+        // Check if player already owns this item (except for rope item which can be bought multiple times)
+        if (itemID != spareRopesItemID && PlayerOwnsItem(itemID))
             return false;
             
         // Deduct cost
-        gameManager.AddScore(-price);
+        gameManager.AddMoney(-price);
         
-        // Add to purchased items
+        // Add to purchased items (except rope which is consumable)
+        if (itemID != spareRopesItemID)
+        {
         purchasedItems.Add(itemID);
+        }
         
         // Mark the item as purchased
         item.isPurchased = true;
@@ -305,7 +352,7 @@ public class StoreManager : MonoBehaviour
             return;
             
         // Get the variant for the current difficulty
-        StoreItemVariant variant = item.itemData.GetVariant(difficultyLevel);
+        StoreItemVariant variant = item.itemData.GetVariant(GetDifficultyLevel());
         
         // Apply effect based on item ID
         switch (item.itemID)
@@ -351,13 +398,36 @@ public class StoreManager : MonoBehaviour
                     ropeManager2.maxStress = Mathf.RoundToInt(ropeManager2.maxStress * (1f + variant.effectValue/100f));
                 }
                 break;
+                
+            case "spare_ropes":
+                // Add ropes to the inventory based on level
+                var ropeManager3 = FindObjectOfType<RopeManager>();
+                if (ropeManager3 != null) {
+                    // Calculate rope count based on level
+                    // Early levels: 1 rope, mid levels: 2 ropes, higher levels: 3 ropes
+                    int ropesToAdd = Mathf.Clamp(1 + (gameManager.currentLevel - 1) / 3, 1, 3);
+                    
+                    ropeManager3.AddRopes(ropesToAdd);
+                    
+                    // Display a floating text to confirm purchase
+                    Canvas mainCanvas = FindObjectOfType<Canvas>();
+                    if (mainCanvas != null && Camera.main != null) {
+                        FloatingText.CreateWorldToUI(
+                            playerController.transform.position,
+                            mainCanvas,
+                            Camera.main,
+                            $"+{ropesToAdd} Ropes!"
+                        );
+                    }
+                }
+                break;
         }
     }
     
     void UpdateMoneyDisplay()
     {
         if (playerMoneyText != null)
-            playerMoneyText.text = "Money: " + gameManager.score;
+            playerMoneyText.text = "Money: " + gameManager.money;
     }
     
     // Creates StoreItem instances from ScriptableObject data
@@ -375,7 +445,7 @@ public class StoreManager : MonoBehaviour
                 {
                     if (itemData != null)
                     {
-                        availableItems.Add(new StoreItem(itemData, difficultyLevel));
+                        availableItems.Add(new StoreItem(itemData, GetDifficultyLevel()));
                     }
                 }
             }
@@ -384,6 +454,9 @@ public class StoreManager : MonoBehaviour
                 // Randomization will be handled when opening the store
                 SelectRandomStoreItems();
             }
+            
+            // Ensure the rope item is always in the store
+            EnsureSpareRopesAvailable();
         }
         else
         {
@@ -415,6 +488,15 @@ public class StoreManager : MonoBehaviour
             itemName = "Gold Polisher",
             description = "Gold is worth 25% more",
             price = 500
+        });
+        
+        // Always add spare ropes as a default item with level-based pricing
+        int ropePrice = gameManager != null ? 50 + (gameManager.currentLevel * 10) : 60;
+        availableItems.Add(new StoreItem {
+            itemID = "spare_ropes",
+            itemName = "Spare Ropes",
+            description = "+1 rope",
+            price = ropePrice
         });
     }
     

@@ -53,7 +53,7 @@ public class Dynamite : Collectible
         }
         
         // Apply damage to player's score
-        GameManager.Instance.AddScore(value); // Value is negative
+        GameManager.Instance.AddMoney(value); // Value is negative
         
         // Apply explosion force to nearby objects (future enhancement)
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

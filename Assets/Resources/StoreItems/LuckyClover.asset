@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: lucky_clover
   itemName: Lucky Clover
-  emojiIcon: 
   icon: {fileID: 0}
   variants:
   - description: Lucky Clover - Easy

@@ -244,7 +244,7 @@ public class Redworm : Collectible
             // Add score penalty
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.AddScore(value); // Apply score change (could be negative)
+                GameManager.Instance.AddMoney(value); // Apply money change (could be negative)
             }
 
             // Destroy the redworm
@@ -261,7 +261,7 @@ public class Redworm : Collectible
         // Add score penalty
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddScore(value);
+            GameManager.Instance.AddMoney(value);
         }
         
         Destroy(gameObject);
